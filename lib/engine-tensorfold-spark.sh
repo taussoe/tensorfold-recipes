@@ -177,25 +177,50 @@ start_rank() {  # start_rank RANK NODE
   tf_docker "$node" -d --name "$(container_name "$r")" --label "$LABEL_KEY=$RECIPE_NAME" -- "${args[@]}" >/dev/null
 }
 
+# The largest window a refused start named (both ranks agree on it), or nothing.
+refused_window() {
+  local r node
+  for r in 0 1; do
+    node=1; [ "$r" = 1 ] && node=2
+    [ "$r" = 1 ] && [ "$NODES" != 2 ] && continue
+    run_on "$node" docker logs --tail 20 "$(container_name "$r")" 2>&1 |
+      sed -n 's/.*largest fitting prompt-plus-reply window: \([0-9][0-9]*\) tokens.*/\1/p' | tail -1
+  done | sort -n | head -1
+}
+
 cmd_start() {
   require_nodes_supported
   run_on 1 docker image inspect "$TF_IMAGE" >/dev/null 2>&1 || die "image missing. Run ./setup.sh first"
   ensure_gpus_free
-  if [ "$NODES" = 2 ]; then
-    start_rank 1 2           # rank 1 first: rank 0 is the rendezvous and waits for it
-    start_rank 0 1
-  else
-    start_rank 0 1
-  fi
-  log "loading (first start also compiles kernels; GLM ~4 min, Flash Next ~90 s, 27B ~1-2 min)"
-  local watch2=""
-  [ "$NODES" = 2 ] && watch2="$(container_name 1)"
-  if ! wait_http "http://127.0.0.1:$PORT/health" "$STARTUP_TIMEOUT" "$(container_name 0)" 1 "$watch2" 2; then
+  local attempt fit
+  for attempt in 1 2; do
+    if [ "$NODES" = 2 ]; then
+      start_rank 1 2           # rank 1 first: rank 0 is the rendezvous and waits for it
+      start_rank 0 1
+    else
+      start_rank 0 1
+    fi
+    log "loading (first start also compiles kernels; GLM ~4 min, Flash Next ~90 s, 27B ~1-2 min)"
+    local watch2=""
+    [ "$NODES" = 2 ] && watch2="$(container_name 1)"
+    if wait_http "http://127.0.0.1:$PORT/health" "$STARTUP_TIMEOUT" "$(container_name 0)" 1 "$watch2" 2; then
+      echo >&2
+      print_endpoint
+      return 0
+    fi
+    # Free memory varies with the page cache (GB10 counts it as used): a CONTEXT that just missed starts again
+    # with the window TensorFold names, when that still holds CONTEXT_MIN tokens.
+    fit=$(refused_window)
+    if [ "$attempt" = 1 ] && [ -n "$fit" ] && [ "${CONTEXT:-0}" != 0 ] && [ "$fit" -lt "${CONTEXT}" ] &&
+        [ "$fit" -ge "${CONTEXT_MIN:-262144}" ]; then
+      CONTEXT=$(( fit / 1024 * 1024 ))
+      warn "free memory now holds a ${fit}-token window, less than CONTEXT: starting with ${CONTEXT}"
+      cmd_stop >/dev/null 2>&1 || true
+      continue
+    fi
     [ "$NODES" = 2 ] && { warn "rank 1 log:"; run_on 2 docker logs --tail 30 "$(container_name 1)" 2>&1 | sed 's/^/    /' >&2 || true; }
-    die "not ready after ${STARTUP_TIMEOUT}s. ./logs.sh shows why; ./stop.sh cleans up"
-  fi
-  echo >&2
-  print_endpoint
+    die "not ready. ./logs.sh shows why; ./stop.sh cleans up"
+  done
 }
 
 cmd_stop() {

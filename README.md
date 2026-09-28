@@ -41,6 +41,9 @@ What it adds to 0.3.6.1, every change tested so drafted replies stay byte-identi
 | Prompt cache for several conversations (rows saved when another conversation takes the caches, 3 GiB budget) | switching back to a long conversation resumes instead of prefilling again |
 | Concurrent GLM streams (`PARALLEL=4`): every stream's drafts verified in one forward, each equal to its serial decoding | 122 tok/s together at 4 streams, 33 each (vLLM: 62 together, 17 each) |
 | Image input for GLM (`image_url` parts): the checkpoint's processor, its vision tower on rank 0 with fp32 products, image-aware prompt cache | screenshots read right; a 1920×1080 screenshot prefills in 5.1 s ([details](dgx-spark/glm-5.3-flash/README.md#images)) |
+| GLM reads `reasoning_effort` (the template's Low/High/Max; before, always Max) | three coding prompts: 685 s at Max, 160 s at High ([agent speed](dgx-spark/glm-5.3-flash/README.md#agent-speed)) |
+| Prompts kept on disk, written as the rows each adds | a 103k-token conversation resumes in 0.8 s after another one, 3.1 s after a restart (85 s cold) |
+| Drafts copied from the context when the last 8 tokens stand earlier | file rewrites 1.12–1.38x faster, replies byte-identical |
 
 With 0.3.5.1's prompt kernels and a bf16 head GEMM for absorb/expand, GLM reads a 32k prompt at 1,292 tok/s and a
 128k one at 1,231 (vLLM: 1,350 and 1,243); on our 0.3.4-based branch it was 772 and 739, on TensorFold 0.3.4 187 and none. The older branch is

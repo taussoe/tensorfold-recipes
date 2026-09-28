@@ -179,6 +179,45 @@ Images take ~2.3 GB on rank 0 (tower and scratch), counted in the startup estima
 fits beside them. We tried attention in split fp16 pieces on tensor cores to speed the tower up: 1.5x faster on the
 largest image, but 1.5% off the exact rows, so the tower stays exact.
 
+## Agent speed
+
+Four things in our `engine/` branch aim at the time an agent (Glyph, a coding harness) waits, measured on the two
+Sparks, 28 September 2026:
+
+**Reasoning effort.** GLM-5.3's template writes a "Reasoning Effort" line: Low, High or Max. TensorFold 0.3.6.1's
+CUDA server does not pass `reasoning_effort` on, so every request thinks at Max. The branch maps it: `minimal`/`low`
+to Low, `medium`/`high` to High, `xhigh`/`max` to Max, `none` turns thinking off; without the field it stays Max.
+Three coding prompts, one seed:
+
+| `reasoning_effort` | Thinking | Time for the three |
+| --- | ---: | ---: |
+| `low` | 182 chars | 57 s |
+| `high` | 14,160 chars | 160 s |
+| none sent (Max) | 109,517 chars | 685 s |
+
+**Prompts kept on disk** (`TF_GLM_DISK_DIR`). Every prompt's rows also go to disk, as the rows it adds to the prompt
+before it, so a long conversation that another request pushed off the GPU, or one from before a restart, resumes
+instead of being read again. A 102,934-token conversation, 85 s to read cold: resumed in 0.8 s after another
+conversation, 3.1 s after a server restart. Files are ~20 KB a token per Spark (64 GiB cap, `TF_GLM_DISK_GIB`),
+and a new engine build starts them afresh.
+
+**Drafts copied from the context** (`TF_GLM_LOOKUP`). When the last 8 tokens also stand earlier in the prompt or
+the reply, a round verifies up to 7 tokens that followed them there, as a model rewriting a file does. Replies stay
+byte-identical (checked with the same token counts, and `drafted == serial` 9/9). Thinking off, greedy:
+
+| Task | MTP drafts only | With copied drafts |
+| --- | ---: | ---: |
+| Rewrite a 660-token file with a rename | 60.0 tok/s | 73.5 tok/s |
+| Rewrite a 1,305-token file with a rename | 61.0 tok/s | 83.9 tok/s |
+| Rewrite a 5,599-token file with a rename | 58.8 tok/s | 65.6 tok/s |
+| Add docstrings, return the whole file | 59.9 tok/s | 69.6 tok/s |
+| New code, prose | 54.1, 47.2 tok/s | 52.7, 46.1 tok/s (no copied rounds: run-to-run noise) |
+
+**The client's prompts.** A server that caches prompts resumes only from an exact prefix. In Glyph we changed two
+things that rewrote the start of a running prompt: tools shown mid-run (the tool list sits at the start of GLM's
+prompt) and compaction that fired every ~5% of the window. Other harnesses may do the same: keep the prompt
+append-only and send `reasoning_effort`.
+
 ## What this recipe does for speed
 
 - **Per-rank halves** (`RANK_SPLIT=1`). `pull.sh` runs TensorFold's splitter once; each rank then loads 91 GB
@@ -206,7 +245,8 @@ largest image, but 1.5% off the exact rows, so the tower stays exact.
 | Variable | Default | Notes |
 | --- | --- | --- |
 | `ACCEPT_NONCOMMERCIAL_DRAFTER` | `0` | `1` pulls and uses DFlash2 (non-commercial license) |
-| `CONTEXT` | `458752` | prompt + reply tokens, tested with a 449k prompt (lowest free memory 12 GB); `0` allocates what fits (465,768 on our Sparks) |
+| `CONTEXT` | `458752` | prompt + reply tokens, tested with a 449k prompt (lowest free memory 12 GB); `0` allocates what fits (465,768 on our Sparks). GB10 counts the page cache as used memory: when a start finds less free, `start.sh` starts with the window that fits (411,648 after an image build) if it holds `CONTEXT_MIN` (262,144) |
+| `ENGINE_ENV` | see `recipe.env` | `TF_GLM_CACHE_GIB=1`, `TF_GLM_DISK_DIR`/`TF_GLM_DISK_GIB` (prompts on disk), `TF_GLM_LOOKUP=1` (copied drafts) |
 | `RANK_SPLIT` | `1` | `0` serves the full checkpoint on both ranks (needs 182 GB of disk on each) |
 | `PARALLEL` | empty | `4`: up to 4 requests decoded together, `CONTEXT` each (default 65,536 then) |
 | `SERVE_ARGS` | `--drafter none` without the opt-in | more `tensorfold serve` flags, e.g. `--mtp-drafts 3`, `--thinking-budget 2048` |
