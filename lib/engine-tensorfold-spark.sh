@@ -193,7 +193,7 @@ cmd_start() {
   run_on 1 docker image inspect "$TF_IMAGE" >/dev/null 2>&1 || die "image missing. Run ./setup.sh first"
   ensure_gpus_free
   local attempt fit
-  for attempt in 1 2; do
+  for attempt in 1 2 3; do
     if [ "$NODES" = 2 ]; then
       start_rank 1 2           # rank 1 first: rank 0 is the rendezvous and waits for it
       start_rank 0 1
@@ -211,9 +211,10 @@ cmd_start() {
     # Free memory varies with the page cache (GB10 counts it as used): a CONTEXT that just missed starts again
     # with the window TensorFold names, when that still holds CONTEXT_MIN tokens.
     fit=$(refused_window)
-    if [ "$attempt" = 1 ] && [ -n "$fit" ] && [ "${CONTEXT:-0}" != 0 ] && [ "$fit" -lt "${CONTEXT}" ] &&
+    # (3% under it: the page cache moves between attempts)
+    if [ "$attempt" != 3 ] && [ -n "$fit" ] && [ "${CONTEXT:-0}" != 0 ] && [ "$fit" -lt "${CONTEXT}" ] &&
         [ "$fit" -ge "${CONTEXT_MIN:-262144}" ]; then
-      CONTEXT=$(( fit / 1024 * 1024 ))
+      CONTEXT=$(( fit * 97 / 100 / 1024 * 1024 ))
       warn "free memory now holds a ${fit}-token window, less than CONTEXT: starting with ${CONTEXT}"
       cmd_stop >/dev/null 2>&1 || true
       continue

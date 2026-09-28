@@ -218,6 +218,17 @@ things that rewrote the start of a running prompt: tools shown mid-run (the tool
 prompt) and compaction that fired every ~5% of the window. Other harnesses may do the same: keep the prompt
 append-only and send `reasoning_effort`.
 
+### Where a decode step goes
+
+Profiled on rank 0 (`engine/tools/profile_glm_decode.py`, `engine/tools/bench_glm_comm.py`), 28 September 2026:
+one row takes 27.8 ms without the network and 29.1 ms across both Sparks, so the 90 all-gathers of a step cost
+~1.3 ms (alone they take 4-6 ms; they overlap the kernels). Of the 28.2 ms of kernels, the routed and shared
+experts take 12.3 ms, reading ~2.7 GB at ~220 GB/s (80% of GB10's 273 GB/s); the other 4-bit projections 10.5 ms
+at ~175 GB/s; the rest ~5 ms. Four rows take 2.6x the expert time, because four tokens route to ~3x as many
+experts. Decoding is bound by memory bandwidth and close to it: fewer bytes a token is what is left, and
+Mia-AiLab's EXL3 checkpoint keeps every non-expert weight in BF16 (3.5x the bytes of the 4-bit projections), so
+we did not expect it to be faster and left it untested.
+
 ## What this recipe does for speed
 
 - **Per-rank halves** (`RANK_SPLIT=1`). `pull.sh` runs TensorFold's splitter once; each rank then loads 91 GB
