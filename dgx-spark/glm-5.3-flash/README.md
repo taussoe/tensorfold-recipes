@@ -201,6 +201,12 @@ instead of being read again. A 102,934-token conversation, 85 s to read cold: re
 conversation, 3.1 s after a server restart. Files are ~20 KB a token per Spark (64 GiB cap, `TF_GLM_DISK_GIB`),
 and a new engine build starts them afresh.
 
+**Checkpoints part way through a prompt** (with `TF_GLM_DISK_DIR`). A prefill also writes its state every 4,096
+tokens up to 32,768 and every 16,384 after, so a prompt that shares only the start of a kept one resumes from the
+last checkpoint before they part: a client that trimmed or edited earlier text, or another agent with the same tool
+list (GLM's template puts the tools first) and its own system prompt. Three agents with one 60-tool list (17,936
+tokens) and different system prompts: 18.7 s for the first, 2.1 s and 3.2 s for the others (16,384 resumed).
+
 **Drafts copied from the context** (`TF_GLM_LOOKUP`). When the last 8 tokens also stand earlier in the prompt or
 the reply, a round verifies up to 7 tokens that followed them there, as a model rewriting a file does. Replies stay
 byte-identical (checked with the same token counts, and `drafted == serial` 9/9). Thinking off, greedy:
@@ -223,11 +229,16 @@ append-only and send `reasoning_effort`.
 Profiled on rank 0 (`engine/tools/profile_glm_decode.py`, `engine/tools/bench_glm_comm.py`), 28 September 2026:
 one row takes 27.8 ms without the network and 29.1 ms across both Sparks, so the 90 all-gathers of a step cost
 ~1.3 ms (alone they take 4-6 ms; they overlap the kernels). Of the 28.2 ms of kernels, the routed and shared
-experts take 12.3 ms, reading ~2.7 GB at ~220 GB/s (80% of GB10's 273 GB/s); the other 4-bit projections 10.5 ms
-at ~175 GB/s; the rest ~5 ms. Four rows take 2.6x the expert time, because four tokens route to ~3x as many
-experts. Decoding is bound by memory bandwidth and close to it: fewer bytes a token is what is left, and
-Mia-AiLab's EXL3 checkpoint keeps every non-expert weight in BF16 (3.5x the bytes of the 4-bit projections), so
-we did not expect it to be faster and left it untested.
+experts take 12.3 ms, reading ~2.7 GB at ~220 GB/s (80% of GB10's 273 GB/s); the other 4-bit projections run at
+~220 GB/s too with weights not in L2 (`engine/tools/tune_glm_qmm.py`: the best K split of every shape would save
+0.8 ms a step, under 3%, so we kept TensorFold's); the rest ~5 ms. Four rows take 2.6x the expert time, because
+four tokens route to ~3x as many experts. Decoding is bound by memory bandwidth and close to it.
+
+Fewer bytes a token is what is left, so we measured Mia-AiLab's EXL3 checkpoint (`GLM-5.3-Flash-EXL3-TR3-4bpw`:
+4-bit EXL3 experts, every other weight BF16) on the same branch: a 1-row step takes 58.1 ms (29.1 on MLX), standard
+cells 30.6 / 28.3 / 36.9 / 27.2 tok/s and code as a chat reply 35.4 / 40.2 (MLX: 45.7 / 42.8 / 60.4 / 45.9 and
+54.1 / 58.0), drafted == serial 9/9; its window fits 507,018 tokens against 465,768. TensorFold's own log says as
+much ("the MLX checkpoint ... runs faster"). The MLX checkpoint stays.
 
 ## What this recipe does for speed
 
