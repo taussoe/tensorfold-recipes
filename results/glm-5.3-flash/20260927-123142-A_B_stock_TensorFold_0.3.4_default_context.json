@@ -1,0 +1,127 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "A/B stock TensorFold 0.3.4, default context",
+ "model": "GLM-5.3-Flash",
+ "url": "http://<server>:8080",
+ "started_utc": "2026-09-27T12:31:42+00:00",
+ "finished_utc": "2026-09-27T12:32:18+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "TensorFold 0.3.4 (pinned, unchanged)"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 47.92,
+   "decode_tps_min": 33.42,
+   "decode_tps_max": 55.3,
+   "decode_tps_all": [
+    43.0,
+    52.05,
+    33.42,
+    55.3,
+    47.92
+   ],
+   "ttft_s_median": 0.143,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Also, write a function that returns the sum of all the even Fibonacci numbers less than n.\n\nShort Answer: The Fibonacci sequence is a series of numbers where each number is the sum of the two precedi",
+   "text_sha256": [
+    "8ab176348fc3f889",
+    "5c0abad25a6a9136",
+    "8ef30bc144a1cb38",
+    "efed57b53933e2ba",
+    "df75016f6618da25"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 44.72,
+   "decode_tps_min": 41.61,
+   "decode_tps_max": 48.41,
+   "decode_tps_all": [
+    41.61,
+    44.72,
+    48.41,
+    45.25,
+    44.01
+   ],
+   "ttft_s_median": 0.218,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU\n\n## The Plain-English Explanation\n\nImagine you have to grade a huge stack of tests, and every test is graded the same way. You could grade them all yourself, one at a ",
+   "text_sha256": [
+    "9d0b01876a997cd2",
+    "c9c869b9cf1f9542",
+    "ae16af78dcf24749",
+    "6260828b60d4b5cb",
+    "596b4a36fdf3a1f2"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 57.01,
+   "decode_tps_min": 56.76,
+   "decode_tps_max": 57.1,
+   "decode_tps_all": [
+    57.06,
+    57.1,
+    56.89,
+    57.01,
+    56.76
+   ],
+   "ttft_s_median": 0.136,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, starting from 0 and 1. The sequence goes: 0, 1, 1, 2, 3, 5, 8, 13, 21, and so on. The",
+   "text_sha256": [
+    "31b4365862fc8a61",
+    "31b4365862fc8a61",
+    "31b4365862fc8a61",
+    "31b4365862fc8a61",
+    "31b4365862fc8a61"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 46.7,
+   "decode_tps_min": 46.58,
+   "decode_tps_max": 47.34,
+   "decode_tps_all": [
+    46.58,
+    46.7,
+    46.67,
+    47.34,
+    46.91
+   ],
+   "ttft_s_median": 0.217,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU, in Plain English\n\n## The Big Idea\n\nA CPU is like a few brilliant chefs who cook one dish at a time, very fast. A GPU is like a thousand line cooks who each do one sim",
+   "text_sha256": [
+    "d59a6cbffabcf632",
+    "d59a6cbffabcf632",
+    "d59a6cbffabcf632",
+    "d59a6cbffabcf632",
+    "d59a6cbffabcf632"
+   ]
+  }
+ ]
+}

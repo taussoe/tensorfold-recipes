@@ -1,0 +1,92 @@
+# Qwen3.8 Flash Next on 1 or 2× DGX Spark (TensorFold)
+
+Qwen3.8 Flash Next: 512 routed experts, hyper-connections, sparse attention, hashed n-gram tables and an MTP
+head, 4-bit. TensorFold drafts up to 6 tokens a round with the MTP head and verifies them in one CUDA graph.
+
+| | |
+| --- | --- |
+| Checkpoint | [`Vontra/Qwen3.8-Flash-Next-MLX-4bit-MTP`](https://huggingface.co/Vontra/Qwen3.8-Flash-Next-MLX-4bit-MTP), 113 GB |
+| Machines | 2 Sparks by default (40.7 GB of weights each); `NODES=1` for one (80.4 GB) |
+| API | `http://<spark1>:8080/v1`, model id `Qwen3.8-Flash-Next` |
+| Context | what fits (TensorFold 0.3.5): 157,607 tokens on one Spark, the full 262,144 on two; 128k prompts measured on both |
+| Start | about 80 s on two Sparks, 90 s on one |
+
+## Run it
+
+```bash
+./setup.sh && ./pull.sh
+./start.sh                 # two Sparks
+NODES=1 ./start.sh         # one Spark
+./chat.sh "Give me three names for a coffee shop run by robots."
+./bench.sh
+./stop.sh
+```
+
+## What to expect
+
+Published by TensorFold (decode tok/s, one stream, 64 tokens, median of 5 seeds):
+
+| | Code, sampled | Chat, sampled | Code, greedy | Chat, greedy |
+| --- | ---: | ---: | ---: | ---: |
+| TensorFold, 1 Spark | 68.3 | 58.5 | 73.1 | 60.2 |
+| TensorFold, 2 Sparks | 103.8 | 84.0 | 96.2 | 100.2 |
+| vLLM NVFP4 + MTP=3, 1 Spark | 42.4 | 33.2 | 40.9 | 37.6 |
+| vLLM NVFP4 + MTP=3, 2 Sparks (TP2 + EP) | 46.4 | 41.4 | 55.2 | 50.7 |
+
+This is the fastest model in the set: each token reads only the experts it routes to.
+
+### Measured: TensorFold 0.3.5.1 (engine/)
+
+Measured with this repo's benchmark on 28 September 2026. Flash Next runs TensorFold 0.3.5.1's own code in our
+`engine/` branch (only GLM has changes there): its prompt path reads the 4-bit weights with FP8 tensor cores, and
+drafted replies still equal serial ones (9/9).
+
+| | Context | Prompt reading, 32k | First token, 32k | Prompt reading, 128k | First token, 128k | Decode, standard cells | Decode at 32k / 128k |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| TensorFold 0.3.4, 1 Spark | 8k | 104 tok/s | 318 s | – | – | 67 / 60 / 72 / 59 | 52.6 |
+| Our 0.3.4-based branch, 1 Spark | 40k | 634 tok/s | 52 s | – | – | 65 / 57 / 72 / 59 | 49.5 |
+| **0.3.5.1, 1 Spark** | 157k | **1,901 tok/s** | **17 s** | **1,656 tok/s** | **79 s** | 75 / 61 / 75 / 73 | 38.9 / 40.0 |
+| **0.3.5.1, 2 Sparks** | 262k | **2,450 tok/s** | **13.5 s** | **2,031 tok/s** | **65 s** | **100 / 91 / 91 / 88** | 59.0 / 51.9 |
+| **0.3.6.1, 1 Spark** | 157k | **1,890 tok/s** | **17.5 s** | **1,800 tok/s** | **73 s** | 75 / 60 / 75 / 72 | 30.5 / 40.0 |
+| **0.3.6.1, 2 Sparks** | 262k | **2,599 tok/s** | **12.8 s** | **2,258 tok/s** | **58 s** | **103 / 90 / 91 / 86** | 57.7 / 51.5 |
+| vLLM + MTP (published, 1 Spark) | | 2,314 tok/s | | | | 42 / 33 / 41 / 38 | |
+
+Every run found the hidden fact at 32k and 128k. Code written as a chat reply (`--suites codechat`, 0.3.6.1):
+80.0 / 81.2 tok/s on one Spark and 114.4 / 110.0 on two (sampled / greedy).
+
+**Several requests at once** (`NODES=1 PARALLEL=8 ./start.sh`; TensorFold 0.3.6 runs concurrent Flash Next streams on
+one GPU). One Spark, 256-token prose replies, each stream with a 32k context, drafted == serial 9/9:
+
+| Concurrent streams | Per stream | Together |
+| --- | ---: | ---: |
+| 1 | 54.0 tok/s | 52.3 tok/s |
+| 2 | 48.5 | 93.1 |
+| 4 | 36.3 | 137.6 |
+| 8 | 24.1 | **181.3** (vLLM + MTP on one Spark, published: 163) |
+
+## What matters for speed
+
+- **Keep the n-gram tables in the page cache.** The checkpoint carries 32 GB of hashed n-gram tables that stay
+  memory-mapped; each token reads 16 rows of them. If the kernel evicts them, every token waits ~8 ms on the
+  disk. On one Spark (80 GB weights + 32 GB tables of 128) that is tight: stop everything else, and prefer two
+  Sparks. Never drop caches while it serves.
+- **MTP depth.** `--mtp-drafts N` (default 6 on CUDA; the chain also stops under 30% confidence). Compare with
+  `SERVE_ARGS="--mtp-drafts 4" ./start.sh` then `./bench.sh --label mtp4`.
+- The draft head reads a 79,591-token subset of the vocabulary (code and docs heavy). Text in rare scripts drafts
+  less, never wrongly.
+
+## Settings (`recipe.env`)
+
+| Variable | Default | Notes |
+| --- | --- | --- |
+| `NODES` | `2` | `1` or `2` |
+| `PARALLEL` | empty | `8`: up to 8 requests together (one Spark: `NODES=1`) |
+| `SERVE_ARGS` | empty | e.g. `--mtp-drafts 4`, `--no-thinking` |
+
+## Limits
+
+- Long context: `CONTEXT=N ./start.sh` sizes the caches for N tokens. We measured 32k prompts (needle found,
+  drafted == serial); larger windows are untested.
+- One stream; requests queue.
+
+Source: [TensorFold's Flash Next recipe](https://github.com/ashhart/TensorFold/blob/main/docs/recipes/qwen3.8-flash-next.md#dgx-spark-cuda).

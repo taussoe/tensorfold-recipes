@@ -1,0 +1,137 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-27b-mac",
+ "label": "0.3.5.1, drafter bf16, High Power",
+ "model": "Qwen3.8-27B",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T06:40:35+00:00",
+ "finished_utc": "2026-09-28T06:41:09+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": "be21e3a",
+ "meta": {
+  "engine": "tensorfold-mac",
+  "nodes": "1",
+  "checkpoint": "Vontra/Qwen3.8-27B-MLX-4bit",
+  "platform": "Apple M3 Max",
+  "tensorfold_source": "local",
+  "tensorfold_image": "",
+  "tensorfold_commit": "beddbb7",
+  "powermode": "2"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 68.51,
+   "decode_tps_min": 51.94,
+   "decode_tps_max": 89.17,
+   "decode_tps_all": [
+    59.85,
+    89.17,
+    68.51,
+    51.94,
+    68.62
+   ],
+   "ttft_s_median": 0.185,
+   "tokens": 64,
+   "draft_acceptance": 0.527,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\nThe user wants a short Python function that computes the Fibonacci sequence, plus an explanation. Let me think about what approach to take:\n\nOptions:\n1. Iterative approach (loop) - simple, e",
+   "text_sha256": [
+    "f1b265f0abb0bbfa",
+    "0d80014b5b45c535",
+    "993cdf26235ab2a7",
+    "a8158d414d5e65e2",
+    "953ade4afac953f2"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 41.32,
+   "decode_tps_min": 39.3,
+   "decode_tps_max": 58.17,
+   "decode_tps_all": [
+    46.97,
+    41.32,
+    39.3,
+    58.17,
+    40.87
+   ],
+   "ttft_s_median": 0.194,
+   "tokens": 64,
+   "draft_acceptance": 0.308,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### Part 1: How Matrix Multiplication Uses a GPU (Plain English)\n\nImagine you have a giant spreadsheet (Matrix A) and another giant spreadsheet (Matrix B). You need to multiply them to get a result (M",
+   "text_sha256": [
+    "9f83d608dead7ecf",
+    "7f98cca264c7df73",
+    "dc5c27762ddbec07",
+    "cb5b7e2929a170ba",
+    "29b29b6a1130ddd4"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 59.44,
+   "decode_tps_min": 58.94,
+   "decode_tps_max": 59.63,
+   "decode_tps_all": [
+    59.44,
+    59.63,
+    58.94,
+    59.52,
+    59.41
+   ],
+   "ttft_s_median": 0.183,
+   "tokens": 64,
+   "draft_acceptance": 0.442,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\nThe user wants a short Python function that computes the Fibonacci sequence, along with an explanation. Let me think about what would be most useful:\n\nOptions for computing Fibonacci:\n1. Rec",
+   "text_sha256": [
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 45.16,
+   "decode_tps_min": 44.89,
+   "decode_tps_max": 45.61,
+   "decode_tps_all": [
+    44.89,
+    45.47,
+    45.16,
+    45.61,
+    45.1
+   ],
+   "ttft_s_median": 0.191,
+   "tokens": 64,
+   "draft_acceptance": 0.3,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### How Matrix Multiplication Uses a GPU (In Plain English)\n\nTo understand how a GPU handles matrix multiplication, it helps to compare it to a CPU (the main processor in your computer).\n\n#### The Ana",
+   "text_sha256": [
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff"
+   ]
+  }
+ ]
+}

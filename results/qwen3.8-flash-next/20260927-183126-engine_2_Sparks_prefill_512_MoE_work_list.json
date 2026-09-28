@@ -1,0 +1,227 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-flash-next",
+ "label": "engine/, 2 Sparks, prefill 512 + MoE work list",
+ "model": "Qwen3.8-Flash-Next",
+ "url": "http://<server>:8080",
+ "started_utc": "2026-09-27T18:31:26+00:00",
+ "finished_utc": "2026-09-27T18:33:42+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "TensorFold engine/ (prefill 512, MoE work list)"
+ },
+ "cells": [
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.97,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 91.30774673503741,
+     "serial_tps": 50.51368987673504
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 99.1982777439374,
+     "serial_tps": 50.46050077724279
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 101.38367370690955,
+     "serial_tps": 50.35727826337091
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 86.4773573117515,
+     "serial_tps": 50.88332787680915
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 72.2806176870723,
+     "serial_tps": 50.47202634423704
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 80.11157434097856,
+     "serial_tps": 50.47483649869622
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 133.16648591265627,
+     "serial_tps": 50.470928079302595
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 140.8990087357699,
+     "serial_tps": 51.02078722950644
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 141.43163427324362,
+     "serial_tps": 50.799540219996445
+    }
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 95.24,
+   "decode_tps_min": 84.39,
+   "decode_tps_max": 104.2,
+   "decode_tps_all": [
+    90.91,
+    102.31,
+    84.39,
+    104.2,
+    95.24
+   ],
+   "ttft_s_median": 0.08,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\n\n</think>\n\n# Fibonacci Sequence in Python\n\n## Implementation\n\n```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"\n    Compute the first `n` numbers of the Fibonacci sequence.\n    \n    Args",
+   "text_sha256": [
+    "36379247ea155993",
+    "56543d7b9c1481d8",
+    "6b8b75a5924b49a3",
+    "9c6d0fa112cb205b",
+    "8921a4717a3879fb"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 80.15,
+   "decode_tps_min": 72.36,
+   "decode_tps_max": 94.02,
+   "decode_tps_all": [
+    80.15,
+    76.59,
+    94.02,
+    85.58,
+    72.36
+   ],
+   "ttft_s_median": 0.151,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### Part 1: How Matrix Multiplication Uses a GPU (Plain English)\n\nImagine you have a huge table of numbers (Matrix A) and another huge table of numbers (Matrix B), and you want to combine them into a ",
+   "text_sha256": [
+    "0ac2e3a69df83e86",
+    "de4304fcfd248c19",
+    "1f7caa3b18809174",
+    "87bf40dca4f5cdc7",
+    "e5a39875171b7dc9"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 89.16,
+   "decode_tps_min": 88.33,
+   "decode_tps_max": 89.62,
+   "decode_tps_all": [
+    89.16,
+    89.2,
+    89.62,
+    88.33,
+    88.87
+   ],
+   "ttft_s_median": 0.085,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\n\n</think>\n\nHere is a concise and efficient Python function to compute the Fibonacci sequence, followed by a detailed explanation.\n\n### Python Function\n\n```python\ndef fibonacci(n: int) -> lis",
+   "text_sha256": [
+    "f4de8be796db3e37",
+    "f4de8be796db3e37",
+    "f4de8be796db3e37",
+    "f4de8be796db3e37",
+    "f4de8be796db3e37"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 92.66,
+   "decode_tps_min": 92.21,
+   "decode_tps_max": 94.49,
+   "decode_tps_all": [
+    94.49,
+    92.91,
+    92.66,
+    92.36,
+    92.21
+   ],
+   "ttft_s_median": 0.155,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### How Matrix Multiplication Uses a GPU (In Plain English)\n\nTo understand how a GPU (Graphics Processing Unit) handles matrix multiplication, it helps to first understand the difference between a CPU",
+   "text_sha256": [
+    "a4e8ccaed211a937",
+    "a4e8ccaed211a937",
+    "a4e8ccaed211a937",
+    "a4e8ccaed211a937",
+    "a4e8ccaed211a937"
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-8192",
+   "prompt_tokens": 8367,
+   "ttft_s": 11.13,
+   "prefill_tps": 751.9,
+   "decode_tps_median": 89.09,
+   "needle_found": true,
+   "followup_ttft_s": 3.22,
+   "followup_prompt_tokens": 8647,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 106.62,
+   "sample": "DEPLOY_CODE = \"KITE-7678\"\n\n### Repository Architecture Explanation\n\nThe repository consists of a collection of independent, domain-specific utility modules. Each module follows a consistent architectu"
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 33141,
+   "ttft_s": 36.19,
+   "prefill_tps": 915.6,
+   "decode_tps_median": 76.83,
+   "needle_found": true,
+   "followup_ttft_s": 1.99,
+   "followup_prompt_tokens": 33423,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 102.69,
+   "sample": "DEPLOY_CODE = \"ORCA-7409\"\n\n### Repository Architecture Explanation\n\nThe repository consists of a collection of independent, modular Python files, each defining a specific `@dataclass` that acts as a u"
+  }
+ ]
+}

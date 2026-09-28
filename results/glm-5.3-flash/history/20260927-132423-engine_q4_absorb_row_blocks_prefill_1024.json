@@ -1,0 +1,227 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "engine/ q4 absorb, row blocks, prefill 1024",
+ "model": "GLM-5.3-Flash",
+ "url": "http://<server>:8080",
+ "started_utc": "2026-09-27T13:24:23+00:00",
+ "finished_utc": "2026-09-27T13:32:42+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "TensorFold engine/ (latent q4, prefill 1024)"
+ },
+ "cells": [
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.58,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 57.96245200190939,
+     "serial_tps": 32.34109987826078
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 48.25888096502209,
+     "serial_tps": 31.960305080376553
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 50.929485437899785,
+     "serial_tps": 32.2904788062022
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 43.44963167859094,
+     "serial_tps": 32.690238909671585
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 39.64066984591553,
+     "serial_tps": 31.810213339925795
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 41.764404678965626,
+     "serial_tps": 31.39070401884438
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 55.33713702798074,
+     "serial_tps": 33.53722297458407
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 52.89662621142421,
+     "serial_tps": 32.543594499962495
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 55.84455521079486,
+     "serial_tps": 33.61993740139258
+    }
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 45.86,
+   "decode_tps_min": 37.05,
+   "decode_tps_max": 55.87,
+   "decode_tps_all": [
+    45.86,
+    50.99,
+    37.05,
+    55.87,
+    45.4
+   ],
+   "ttft_s_median": 0.143,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Also, write a function that returns the sum of all the even Fibonacci numbers less than n.\n\nFilo tutor solution\n\nStudents who ask this question also asked\n\nQuestion Text    Write a short Python funct",
+   "text_sha256": [
+    "b2e6e24abae2992e",
+    "5c0abad25a6a9136",
+    "a3337a54c9a1fffc",
+    "efed57b53933e2ba",
+    "df75016f6618da25"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 38.44,
+   "decode_tps_min": 37.12,
+   "decode_tps_max": 41.05,
+   "decode_tps_all": [
+    38.44,
+    41.05,
+    37.12,
+    38.37,
+    39.57
+   ],
+   "ttft_s_median": 0.22,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU\n\n## The Plain-English Explanation\n\nImagine you have to grade thousands of exams, and each exam has the same set of questions. You could grade them all yourself, one at",
+   "text_sha256": [
+    "28e4baa6eaaf5c60",
+    "48a85a0cc2227f11",
+    "720dec4154379d44",
+    "8ed1a5c3c2d8d75e",
+    "c0a7fae6ae911759"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 59.71,
+   "decode_tps_min": 59.24,
+   "decode_tps_max": 60.12,
+   "decode_tps_all": [
+    59.71,
+    60.12,
+    59.75,
+    59.4,
+    59.24
+   ],
+   "ttft_s_median": 0.145,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 25",
+   "text_sha256": [
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 44.71,
+   "decode_tps_min": 44.63,
+   "decode_tps_max": 45.02,
+   "decode_tps_all": [
+    44.63,
+    45.02,
+    44.76,
+    44.71,
+    44.63
+   ],
+   "ttft_s_median": 0.218,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU, in Plain English\n\n## The Big Idea\n\nA CPU is like a few brilliant chefs who cook one dish at a time, very fast. A GPU is like a thousand line cooks who each handle one",
+   "text_sha256": [
+    "c13cb28938fbfb2d",
+    "c13cb28938fbfb2d",
+    "c13cb28938fbfb2d",
+    "c13cb28938fbfb2d",
+    "c13cb28938fbfb2d"
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 73.93,
+   "prefill_tps": 443.3,
+   "decode_tps_median": 41.41,
+   "needle_found": true,
+   "followup_ttft_s": 0.63,
+   "followup_prompt_tokens": 33042,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 48.54,
+   "sample": "`DEPLOY_CODE = \"ORCA-7409\"`\n\n## Repository Architecture\n\nThis repository is a collection of ~76 small, structurally identical Python modules, each following the same template. Here's the breakdown:\n\n#"
+  },
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 130839,
+   "ttft_s": 291.17,
+   "prefill_tps": 449.4,
+   "decode_tps_median": 43.91,
+   "needle_found": true,
+   "followup_ttft_s": 0.54,
+   "followup_prompt_tokens": 131111,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 44.3,
+   "sample": "The value of `DEPLOY_CODE` is **\"ORCA-8359\"**.\n\n## Repository Architecture\n\nThis repository is a large, highly repetitive codebase of ~300 small Python modules, each following an identical structural "
+  }
+ ]
+}

@@ -1,0 +1,81 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-27b-mac",
+ "label": "0.3.4 code as chat, High Power",
+ "model": "Qwen3.8-27B",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T06:43:27+00:00",
+ "finished_utc": "2026-09-28T06:43:37+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": "be21e3a",
+ "meta": {
+  "engine": "tensorfold-mac",
+  "nodes": "1",
+  "checkpoint": "Vontra/Qwen3.8-27B-MLX-4bit",
+  "platform": "Apple M3 Max",
+  "tensorfold_source": "local",
+  "tensorfold_image": "",
+  "tensorfold_commit": "beddbb7",
+  "powermode": "2"
+ },
+ "cells": [
+  {
+   "suite": "codechat",
+   "cell": "code-chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 92.56,
+   "decode_tps_min": 83.49,
+   "decode_tps_max": 93.87,
+   "decode_tps_all": [
+    83.49,
+    86.33,
+    92.68,
+    93.87,
+    92.56
+   ],
+   "ttft_s_median": 0.174,
+   "tokens": 64,
+   "draft_acceptance": 0.762,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"Compute the first n numbers of the Fibonacci sequence.\n    \n    The Fibonacci sequence is defined as:\n        F(0) = 0\n        F(1) = 1\n        F(k",
+   "text_sha256": [
+    "79ce6d5e3acbc277",
+    "4fc9f658269f7949",
+    "a21122edf13beaa0",
+    "01576fac3a287656",
+    "29b672576524db63"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 96.09,
+   "decode_tps_min": 95.4,
+   "decode_tps_max": 97.5,
+   "decode_tps_all": [
+    96.09,
+    95.96,
+    97.5,
+    96.32,
+    95.4
+   ],
+   "ttft_s_median": 0.177,
+   "tokens": 64,
+   "draft_acceptance": 0.914,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"\n    Compute the first n numbers of the Fibonacci sequence.\n    \n    Args:\n        n: The number of Fibonacci numbers to generate.\n        \n    Ret",
+   "text_sha256": [
+    "3ad63ae9770da2b6",
+    "3ad63ae9770da2b6",
+    "3ad63ae9770da2b6",
+    "3ad63ae9770da2b6",
+    "3ad63ae9770da2b6"
+   ]
+  }
+ ]
+}

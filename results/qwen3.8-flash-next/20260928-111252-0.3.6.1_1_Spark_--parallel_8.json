@@ -1,0 +1,132 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-flash-next",
+ "label": "0.3.6.1, 1 Spark, --parallel 8",
+ "model": "Qwen3.8-Flash-Next",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T11:12:52+00:00",
+ "finished_utc": "2026-09-28T11:14:20+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "1",
+  "checkpoint": "Vontra/Qwen3.8-Flash-Next-MLX-4bit-MTP",
+  "platform": "1x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-ff83453d0a",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.82,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 64.45300081098644,
+     "serial_tps": 39.34384016490461
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 71.55653587469119,
+     "serial_tps": 39.40759807197012
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 73.68700299867923,
+     "serial_tps": 39.42411915784531
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 63.03538858402935,
+     "serial_tps": 39.64450357935731
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 48.31525069072618,
+     "serial_tps": 39.361887992307004
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 60.586587126463975,
+     "serial_tps": 39.30100423724693
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 92.65782759610009,
+     "serial_tps": 39.57211584258755
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 100.0869537545644,
+     "serial_tps": 39.277824798902884
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 100.55950685009682,
+     "serial_tps": 39.34119641515066
+    }
+   ]
+  },
+  {
+   "suite": "concurrency",
+   "cell": "streams-1",
+   "streams": 1,
+   "failed": 0,
+   "decode_tps_median": 53.97,
+   "aggregate_tps": 52.3,
+   "ttft_s_median": 0.166
+  },
+  {
+   "suite": "concurrency",
+   "cell": "streams-2",
+   "streams": 2,
+   "failed": 0,
+   "decode_tps_median": 48.55,
+   "aggregate_tps": 93.1,
+   "ttft_s_median": 0.244
+  },
+  {
+   "suite": "concurrency",
+   "cell": "streams-4",
+   "streams": 4,
+   "failed": 0,
+   "decode_tps_median": 36.26,
+   "aggregate_tps": 137.62,
+   "ttft_s_median": 0.404
+  },
+  {
+   "suite": "concurrency",
+   "cell": "streams-8",
+   "streams": 8,
+   "failed": 0,
+   "decode_tps_median": 24.13,
+   "aggregate_tps": 181.35,
+   "ttft_s_median": 0.721
+  }
+ ]
+}

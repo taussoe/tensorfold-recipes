@@ -1,0 +1,33 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "TensorFold latent, prefill 1024, moe tile 32",
+ "model": "GLM-5.3-Flash",
+ "url": "http://<server>:8080",
+ "started_utc": "2026-09-27T11:37:06+00:00",
+ "finished_utc": "2026-09-27T11:38:53+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "TensorFold (engine/, latent cache, prefill 1024)"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 66.48,
+   "prefill_tps": 492.9,
+   "decode_tps_median": 34.75,
+   "needle_found": true,
+   "followup_ttft_s": 3.47,
+   "followup_prompt_tokens": 33042,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 40.82,
+   "sample": "`DEPLOY_CODE = \"ORCA-7409\"`\n\n## Repository Architecture\n\nThis repository is a collection of ~76 small, structurally identical utility modules. Each module follows the same template, differing only in "
+  }
+ ]
+}

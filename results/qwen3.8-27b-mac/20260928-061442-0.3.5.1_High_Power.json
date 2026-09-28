@@ -1,0 +1,255 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-27b-mac",
+ "label": "0.3.5.1, High Power",
+ "model": "Qwen3.8-27B",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T06:14:42+00:00",
+ "finished_utc": "2026-09-28T06:35:39+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": "be21e3a",
+ "meta": {
+  "engine": "tensorfold-mac",
+  "nodes": "1",
+  "checkpoint": "Vontra/Qwen3.8-27B-MLX-4bit",
+  "platform": "Apple M3 Max",
+  "tensorfold_source": "local",
+  "tensorfold_image": "",
+  "tensorfold_commit": "beddbb7",
+  "powermode": "2"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 72.59,
+   "decode_tps_min": 61.22,
+   "decode_tps_max": 110.26,
+   "decode_tps_all": [
+    61.22,
+    110.26,
+    72.59,
+    68.05,
+    91.13
+   ],
+   "ttft_s_median": 0.176,
+   "tokens": 64,
+   "draft_acceptance": 0.538,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\nThe user wants a short Python function that computes the Fibonacci sequence, plus an explanation. Let me think about what approach to take:\n\nOptions:\n1. Iterative approach (loop) - simple, e",
+   "text_sha256": [
+    "f1b265f0abb0bbfa",
+    "0d80014b5b45c535",
+    "993cdf26235ab2a7",
+    "a8158d414d5e65e2",
+    "953ade4afac953f2"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 46.85,
+   "decode_tps_min": 43.14,
+   "decode_tps_max": 83.58,
+   "decode_tps_all": [
+    54.12,
+    45.17,
+    43.14,
+    83.58,
+    46.85
+   ],
+   "ttft_s_median": 0.184,
+   "tokens": 64,
+   "draft_acceptance": 0.308,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### Part 1: How Matrix Multiplication Uses a GPU (Plain English)\n\nImagine you have a giant spreadsheet (Matrix A) and another giant spreadsheet (Matrix B). You need to multiply them to get a result (M",
+   "text_sha256": [
+    "9f83d608dead7ecf",
+    "7f98cca264c7df73",
+    "dc5c27762ddbec07",
+    "cb5b7e2929a170ba",
+    "29b29b6a1130ddd4"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 66.37,
+   "decode_tps_min": 64.92,
+   "decode_tps_max": 67.6,
+   "decode_tps_all": [
+    67.6,
+    66.66,
+    66.37,
+    65.45,
+    64.92
+   ],
+   "ttft_s_median": 0.177,
+   "tokens": 64,
+   "draft_acceptance": 0.438,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\nThe user wants a short Python function that computes the Fibonacci sequence, along with an explanation. Let me think about what would be most useful:\n\nOptions for computing Fibonacci:\n1. Rec",
+   "text_sha256": [
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 50.42,
+   "decode_tps_min": 50.25,
+   "decode_tps_max": 50.88,
+   "decode_tps_all": [
+    50.88,
+    50.6,
+    50.42,
+    50.32,
+    50.25
+   ],
+   "ttft_s_median": 0.198,
+   "tokens": 64,
+   "draft_acceptance": 0.326,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### How Matrix Multiplication Uses a GPU (In Plain English)\n\nTo understand how a GPU handles matrix multiplication, it helps to compare it to a CPU (the main processor in your computer).\n\n#### The Ana",
+   "text_sha256": [
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff"
+   ]
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 3.22,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 72.25531302560813,
+     "serial_tps": 22.41306422120842
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 57.36278086953306,
+     "serial_tps": 22.61977782320561
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 101.21562177959794,
+     "serial_tps": 22.690541056827364
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 44.29739609328592,
+     "serial_tps": 22.72166320525499
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 45.202511713117836,
+     "serial_tps": 22.680891524940716
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 39.271353113539256,
+     "serial_tps": 22.60903101088643
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 112.53609113947876,
+     "serial_tps": 22.90364885601446
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 98.00099883569517,
+     "serial_tps": 22.793154759806768
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 114.40959196867739,
+     "serial_tps": 22.828416813275417
+    }
+   ]
+  },
+  {
+   "suite": "prefill",
+   "cell": "prefill-1024",
+   "prompt_tokens": 900,
+   "ttft_s_median": 4.147,
+   "prefill_tps": 217.0,
+   "cached_tokens": 0
+  },
+  {
+   "suite": "prefill",
+   "cell": "prefill-4096",
+   "prompt_tokens": 3484,
+   "ttft_s_median": 15.966,
+   "prefill_tps": 218.2,
+   "cached_tokens": 0
+  },
+  {
+   "suite": "prefill",
+   "cell": "prefill-16384",
+   "prompt_tokens": 13803,
+   "ttft_s_median": 65.438,
+   "prefill_tps": 210.9,
+   "cached_tokens": 0
+  },
+  {
+   "suite": "prefill",
+   "cell": "prefill-32768",
+   "prompt_tokens": 27565,
+   "ttft_s_median": 139.669,
+   "prefill_tps": 197.4,
+   "cached_tokens": 0
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 33141,
+   "ttft_s": 185.89,
+   "prefill_tps": 178.3,
+   "decode_tps_median": 27.65,
+   "needle_found": true,
+   "followup_ttft_s": 2.28,
+   "followup_prompt_tokens": 33423,
+   "followup_cached_tokens": 33134,
+   "followup_decode_tps": 33.46,
+   "sample": "DEPLOY_CODE = \"ORCA-7409\"\n\nThe repository is a modular Python codebase organized by domain entities, where each module contains a dataclass representing a specific relationship between two system comp"
+  }
+ ]
+}

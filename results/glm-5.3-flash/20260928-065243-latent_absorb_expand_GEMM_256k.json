@@ -1,0 +1,23 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "latent absorb/expand GEMM, 256k",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T06:52:43+00:00",
+ "finished_utc": "2026-09-28T06:52:51+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-5a2e4ce006",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": []
+}

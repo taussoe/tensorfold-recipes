@@ -1,0 +1,272 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-27b",
+ "label": "0.3.6.1 EXL3 3.00bpw, 1 Spark",
+ "model": "Qwen3.8-27B",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T10:36:40+00:00",
+ "finished_utc": "2026-09-28T10:40:46+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "1",
+  "checkpoint": "Vontra/Qwen3.8-27B-MLX-4bit",
+  "platform": "1x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-ff83453d0a",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 83.01,
+   "decode_tps_min": 62.89,
+   "decode_tps_max": 87.67,
+   "decode_tps_all": [
+    63.26,
+    83.01,
+    87.51,
+    62.89,
+    87.67
+   ],
+   "ttft_s_median": 0.495,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\nThe user wants a short Python function that computes the Fibonacci sequence, plus an explanation. Let me think about the best approach.\n\nOptions:\n1. Iterative approach - most efficient for g",
+   "text_sha256": [
+    "88099be590ec2fa1",
+    "eda1bfc25bf02a6c",
+    "d03a9e7d8af90a0d",
+    "5e2ce2e9684ac0dd",
+    "bbc8846648884a4c"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 46.21,
+   "decode_tps_min": 39.71,
+   "decode_tps_max": 67.32,
+   "decode_tps_all": [
+    54.72,
+    41.7,
+    67.32,
+    39.71,
+    46.21
+   ],
+   "ttft_s_median": 0.497,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### How GPU Matrix Multiplication Works in Plain English\n\nTo understand how a GPU handles matrix multiplication, it helps to compare it to how a CPU (the main processor of your computer) works.\n\n**1. ",
+   "text_sha256": [
+    "5d2fbe8e7fc65e35",
+    "20b553737dcf3096",
+    "b09b6e1d18c5186f",
+    "7a50ad9fdd7dd993",
+    "ae0a82593d29f46f"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 67.87,
+   "decode_tps_min": 67.8,
+   "decode_tps_max": 68.14,
+   "decode_tps_all": [
+    68.0,
+    67.87,
+    68.14,
+    67.8,
+    67.86
+   ],
+   "ttft_s_median": 0.496,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\nThe user wants a short Python function that computes the Fibonacci sequence, plus an explanation. Let me think about what \"short\" means here and what approach to take.\n\nOptions:\n1. Iterative",
+   "text_sha256": [
+    "03483d0e49d6d89b",
+    "03483d0e49d6d89b",
+    "03483d0e49d6d89b",
+    "03483d0e49d6d89b",
+    "03483d0e49d6d89b"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 42.03,
+   "decode_tps_min": 41.79,
+   "decode_tps_max": 42.17,
+   "decode_tps_all": [
+    41.79,
+    42.08,
+    42.17,
+    41.99,
+    42.03
+   ],
+   "ttft_s_median": 0.498,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### How Matrix Multiplication Uses a GPU (In Plain English)\n\nTo understand this, imagine you are trying to calculate a massive spreadsheet where every single cell requires a specific calculation.\n\n**1",
+   "text_sha256": [
+    "5a89926df8cc5aab",
+    "5a89926df8cc5aab",
+    "5a89926df8cc5aab",
+    "5a89926df8cc5aab",
+    "5a89926df8cc5aab"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 96.88,
+   "decode_tps_min": 73.44,
+   "decode_tps_max": 124.42,
+   "decode_tps_all": [
+    124.42,
+    73.44,
+    96.88,
+    79.73,
+    109.44
+   ],
+   "ttft_s_median": 0.497,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"Compute the first n numbers of the Fibonacci sequence.\"\"\"\n    if n <= 0:\n        return []\n    if n == 1:\n        return [0]\n    \n    fib = [0, 1]\n",
+   "text_sha256": [
+    "8a91b6219f9e2861",
+    "781c47a1bff0d530",
+    "fb5755adc5e0a0fd",
+    "0cde458b68b5539d",
+    "dd44a69aea1b67c8"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 97.97,
+   "decode_tps_min": 97.42,
+   "decode_tps_max": 98.54,
+   "decode_tps_all": [
+    97.97,
+    97.42,
+    97.6,
+    98.29,
+    98.54
+   ],
+   "ttft_s_median": 0.498,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Fibonacci Sequence in Python\n\n## The Function\n\n```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"Return the first n numbers of the Fibonacci sequence.\"\"\"\n    if n <= 0:\n        return []\n    if n",
+   "text_sha256": [
+    "1d6806d8d81a3012",
+    "1d6806d8d81a3012",
+    "1d6806d8d81a3012",
+    "1d6806d8d81a3012",
+    "1d6806d8d81a3012"
+   ]
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 3.89,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 66.65151361886382,
+     "serial_tps": 17.12245850991516
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 60.43115772323045,
+     "serial_tps": 17.053024935928097
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 110.63768778138609,
+     "serial_tps": 17.062546665906897
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 47.576288317347185,
+     "serial_tps": 17.13844179467375
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 52.92477313338213,
+     "serial_tps": 17.040179661921883
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 45.68561173812647,
+     "serial_tps": 17.039703114513227
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 109.9846335680291,
+     "serial_tps": 17.12298984922764
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 119.69714948139345,
+     "serial_tps": 17.0250497372303
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 100.97298052986264,
+     "serial_tps": 17.018295283366925
+    }
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 33141,
+   "ttft_s": 35.98,
+   "prefill_tps": 921.1,
+   "decode_tps_median": 39.99,
+   "needle_found": true,
+   "followup_ttft_s": 0.8,
+   "followup_prompt_tokens": 33423,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 43.91,
+   "sample": "DEPLOY_CODE = \"ORCA-7409\"\n\nThe repository is a collection of independent Python modules, each defining a dataclass that represents a specific entity relationship (e.g., `ValidatorRegion`, `JournalLedg"
+  }
+ ]
+}

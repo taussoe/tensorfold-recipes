@@ -1,0 +1,119 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "engine/ + MoE work list",
+ "model": "GLM-5.3-Flash",
+ "url": "http://<server>:8080",
+ "started_utc": "2026-09-27T18:20:07+00:00",
+ "finished_utc": "2026-09-27T18:27:13+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "TensorFold engine/ (latent q4, prefill 2048, MoE work list)"
+ },
+ "cells": [
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.52,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 37.78292763495989,
+     "serial_tps": 24.93505839242367
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 42.8512073076498,
+     "serial_tps": 32.25436630388
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 52.4587291495092,
+     "serial_tps": 32.26752791921949
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 41.10017971693318,
+     "serial_tps": 32.41987169943111
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 39.96938415852091,
+     "serial_tps": 32.64049118407834
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 42.96567480420976,
+     "serial_tps": 31.20581443505241
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 52.512839562157566,
+     "serial_tps": 32.34157515241005
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 56.226711251183616,
+     "serial_tps": 32.82382644331276
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 53.89502285926842,
+     "serial_tps": 31.960804614926843
+    }
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 65.67,
+   "prefill_tps": 499.0,
+   "decode_tps_median": 41.07,
+   "needle_found": true,
+   "followup_ttft_s": 1.46,
+   "followup_prompt_tokens": 33042,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 49.49,
+   "sample": "**DEPLOY_CODE = \"ORCA-7409\"**\n\n## Repository Architecture\n\nThis repository is a collection of ~76 small, structurally identical Python modules, each following the same template. They appear to be gene"
+  },
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 130839,
+   "ttft_s": 258.11,
+   "prefill_tps": 506.9,
+   "decode_tps_median": 39.91,
+   "needle_found": true,
+   "followup_ttft_s": 1.24,
+   "followup_prompt_tokens": 131111,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 45.82,
+   "sample": "`DEPLOY_CODE = \"ORCA-8359\"`\n\n## Repository Architecture\n\nThis repository is a large, highly repetitive collection of ~300 small Python modules, each following an identical structural pattern. Here's t"
+  }
+ ]
+}

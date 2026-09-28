@@ -1,0 +1,124 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "engine 32-head prefill attention tiles",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T00:25:51+00:00",
+ "finished_utc": "2026-09-28T00:32:20+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-ddcdffd044",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 54.21,
+   "prefill_tps": 604.5,
+   "decode_tps_median": 39.11,
+   "needle_found": true,
+   "followup_ttft_s": 0.62,
+   "followup_prompt_tokens": 33042,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 48.41,
+   "sample": "**DEPLOY_CODE = \"ORCA-7409\"**\n\n## Repository Architecture\n\nThis repository is a collection of ~76 small, structurally identical Python modules, each following the same template. They appear to be gene"
+  },
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 130839,
+   "ttft_s": 204.26,
+   "prefill_tps": 640.5,
+   "decode_tps_median": 37.6,
+   "needle_found": true,
+   "followup_ttft_s": 0.54,
+   "followup_prompt_tokens": 131111,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 38.2,
+   "sample": "`DEPLOY_CODE = \"ORCA-8359\"`\n\n## Repository Architecture\n\nThis repository is a large, highly repetitive collection of ~300 small Python modules, each following an identical structural pattern. Here's t"
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.33,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 32.106301018484054,
+     "serial_tps": 26.061692105501052
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 37.664382705431755,
+     "serial_tps": 29.160102486263035
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 46.960703423232886,
+     "serial_tps": 28.503452056136485
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 38.734696608088235,
+     "serial_tps": 29.10103020254697
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 37.14697127419908,
+     "serial_tps": 29.450565634784773
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 40.10280965581254,
+     "serial_tps": 30.155729970133287
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 51.818876466231536,
+     "serial_tps": 31.412338708402725
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 51.44085354455357,
+     "serial_tps": 31.289414039794988
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 48.76875415540978,
+     "serial_tps": 31.08626012961985
+    }
+   ]
+  }
+ ]
+}

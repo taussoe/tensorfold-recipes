@@ -1,0 +1,47 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "TensorFold latent, prefill 1024, 128k",
+ "model": "GLM-5.3-Flash",
+ "url": "http://<server>:8080",
+ "started_utc": "2026-09-27T11:39:18+00:00",
+ "finished_utc": "2026-09-27T11:45:38+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "TensorFold (engine/, latent cache, prefill 1024)"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 66.34,
+   "prefill_tps": 494.0,
+   "decode_tps_median": 35.01,
+   "needle_found": true,
+   "followup_ttft_s": 0.26,
+   "followup_prompt_tokens": 33042,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 40.05,
+   "sample": "`DEPLOY_CODE = \"ORCA-7409\"`\n\n## Repository Architecture\n\nThis repository is a collection of ~76 small, structurally identical utility modules. Each module follows the same template, differing only in "
+  },
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 130839,
+   "ttft_s": 265.09,
+   "prefill_tps": 493.6,
+   "decode_tps_median": 36.09,
+   "needle_found": true,
+   "followup_ttft_s": 0.61,
+   "followup_prompt_tokens": 131111,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 39.27,
+   "sample": "The value of `DEPLOY_CODE` is **\"ORCA-8359\"**.\n\n## Repository Architecture\n\nThis repository is a large, highly repetitive collection of ~300 small Python modules, each following an identical structura"
+  }
+ ]
+}

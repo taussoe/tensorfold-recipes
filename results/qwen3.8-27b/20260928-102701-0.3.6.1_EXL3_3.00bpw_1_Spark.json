@@ -1,0 +1,150 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-27b",
+ "label": "0.3.6.1 EXL3 3.00bpw, 1 Spark",
+ "model": "Qwen3.8-27B",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T10:27:01+00:00",
+ "finished_utc": "2026-09-28T10:27:24+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "1",
+  "checkpoint": "Vontra/Qwen3.8-27B-MLX-4bit",
+  "platform": "1x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-f87847723b",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": null,
+   "decode_tps_min": null,
+   "decode_tps_max": null,
+   "decode_tps_all": [],
+   "ttft_s_median": null,
+   "tokens": 0,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "",
+   "text_sha256": [
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": null,
+   "decode_tps_min": null,
+   "decode_tps_max": null,
+   "decode_tps_all": [],
+   "ttft_s_median": null,
+   "tokens": 0,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "",
+   "text_sha256": [
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": null,
+   "decode_tps_min": null,
+   "decode_tps_max": null,
+   "decode_tps_all": [],
+   "ttft_s_median": null,
+   "tokens": 0,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "",
+   "text_sha256": [
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": null,
+   "decode_tps_min": null,
+   "decode_tps_max": null,
+   "decode_tps_all": [],
+   "ttft_s_median": null,
+   "tokens": 0,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "",
+   "text_sha256": [
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-sampled",
+   "greedy": false,
+   "decode_tps_median": null,
+   "decode_tps_min": null,
+   "decode_tps_max": null,
+   "decode_tps_all": [],
+   "ttft_s_median": null,
+   "tokens": 0,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "",
+   "text_sha256": [
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-greedy",
+   "greedy": true,
+   "decode_tps_median": null,
+   "decode_tps_min": null,
+   "decode_tps_max": null,
+   "decode_tps_all": [],
+   "ttft_s_median": null,
+   "tokens": 0,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "",
+   "text_sha256": [
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14",
+    "e3b0c44298fc1c14"
+   ]
+  }
+ ]
+}

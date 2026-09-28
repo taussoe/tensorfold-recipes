@@ -1,0 +1,110 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "0.3.6.1 + glm-long-context, 258k, profiled",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T09:58:09+00:00",
+ "finished_utc": "2026-09-28T10:03:17+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-f87847723b",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.64,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 55.10950940122717,
+     "serial_tps": 31.66030261849585
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 45.28087995647883,
+     "serial_tps": 32.33215014136386
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 54.39997839391462,
+     "serial_tps": 32.13628693311204
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 41.683197966699076,
+     "serial_tps": 33.55040863278949
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 41.73556967730941,
+     "serial_tps": 32.897055115992266
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 43.7777485338796,
+     "serial_tps": 32.7582199435469
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 56.88784898226048,
+     "serial_tps": 34.08522797576264
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 54.80529519750525,
+     "serial_tps": 33.43332793679408
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 56.58169402619593,
+     "serial_tps": 32.6623267557165
+    }
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-258048",
+   "prompt_tokens": 257711,
+   "ttft_s": 236.94,
+   "prefill_tps": 1087.7,
+   "decode_tps_median": 41.66,
+   "needle_found": true,
+   "followup_ttft_s": 1.05,
+   "followup_prompt_tokens": 257983,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 44.19,
+   "sample": "The value of `DEPLOY_CODE` is **`ORCA-9376`**.\n\n## Repository Architecture\n\nThis repository is a large, highly repetitive \"sync-utilities\" codebase \u2014 hundreds of small modules, each following an ident"
+  }
+ ]
+}

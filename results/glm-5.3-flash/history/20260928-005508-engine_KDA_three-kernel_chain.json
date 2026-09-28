@@ -1,0 +1,232 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "engine KDA three-kernel chain",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T00:55:08+00:00",
+ "finished_utc": "2026-09-28T01:01:31+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-7475e7d0ac",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 43.04,
+   "prefill_tps": 761.4,
+   "decode_tps_median": 33.58,
+   "needle_found": true,
+   "followup_ttft_s": 0.37,
+   "followup_prompt_tokens": 33042,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 46.01,
+   "sample": "**DEPLOY_CODE = \"ORCA-7409\"**\n\n## Repository Architecture\n\nThis repository is a collection of ~76 small, structurally identical Python modules, each following the same template. They appear to be gene"
+  },
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 130839,
+   "ttft_s": 174.65,
+   "prefill_tps": 749.2,
+   "decode_tps_median": 33.63,
+   "needle_found": true,
+   "followup_ttft_s": 0.62,
+   "followup_prompt_tokens": 131111,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 42.43,
+   "sample": "`DEPLOY_CODE = \"ORCA-8359\"`\n\n## Repository Architecture\n\nThis repository is a large, highly repetitive collection of ~300 small Python modules, each following an identical structural pattern. Here's t"
+  },
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 38.39,
+   "decode_tps_min": 31.71,
+   "decode_tps_max": 46.24,
+   "decode_tps_all": [
+    38.39,
+    37.96,
+    31.71,
+    46.24,
+    43.57
+   ],
+   "ttft_s_median": 0.131,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Also, write a function that returns the sum of all the even Fibonacci numbers less than n.\n\nShort Answer\n\nThis code is a Python solution to find the sum of all even Fibonacci numbers less than n. It ",
+   "text_sha256": [
+    "4ad09f2d1820997e",
+    "5c0abad25a6a9136",
+    "9d33c82a015ecb5b",
+    "efed57b53933e2ba",
+    "b0ca05307228e0b6"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 37.66,
+   "decode_tps_min": 35.65,
+   "decode_tps_max": 39.13,
+   "decode_tps_all": [
+    35.65,
+    39.13,
+    38.62,
+    37.62,
+    37.66
+   ],
+   "ttft_s_median": 0.219,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU\n\n## The Plain-English Explanation\n\nImagine you run a bakery, and you need to calculate the price of 100 different orders, where each order combines ingredients in diff",
+   "text_sha256": [
+    "73484d7f04fcd733",
+    "c9c869b9cf1f9542",
+    "8aec96544f50ec14",
+    "ce6e6a7230bbb6f7",
+    "d0e63e3cd4f2bcf0"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 57.64,
+   "decode_tps_min": 55.59,
+   "decode_tps_max": 58.09,
+   "decode_tps_all": [
+    57.72,
+    57.64,
+    55.59,
+    56.15,
+    58.09
+   ],
+   "ttft_s_median": 0.132,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 25",
+   "text_sha256": [
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 37.68,
+   "decode_tps_min": 37.22,
+   "decode_tps_max": 37.84,
+   "decode_tps_all": [
+    37.68,
+    37.4,
+    37.22,
+    37.84,
+    37.73
+   ],
+   "ttft_s_median": 0.21,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU, in Plain English\n\n## The Big Idea\n\nA CPU is like a few brilliant chefs who can cook anything, but one dish at a time. A GPU is like a stadium full of thousands of ave",
+   "text_sha256": [
+    "742c6f711d49f8c3",
+    "742c6f711d49f8c3",
+    "742c6f711d49f8c3",
+    "742c6f711d49f8c3",
+    "742c6f711d49f8c3"
+   ]
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.56,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 54.78227873355116,
+     "serial_tps": 28.313742078973483
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 39.16285709219113,
+     "serial_tps": 30.608674151268985
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 48.11666576099569,
+     "serial_tps": 30.76569423339882
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 38.549884698689134,
+     "serial_tps": 31.14350444777028
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 36.541247119195305,
+     "serial_tps": 30.67505899342638
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 39.36877948951755,
+     "serial_tps": 30.55446629022106
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 51.51466106982196,
+     "serial_tps": 30.22968767044655
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 51.546179583549,
+     "serial_tps": 30.301706528784493
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 48.26434777929568,
+     "serial_tps": 30.571813818852156
+    }
+   ]
+  }
+ ]
+}

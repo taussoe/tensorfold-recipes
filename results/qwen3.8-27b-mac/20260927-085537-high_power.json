@@ -1,0 +1,351 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-27b-mac",
+ "label": "high power",
+ "model": "Qwen3.8-27B",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-27T08:55:37+00:00",
+ "finished_utc": "2026-09-27T09:00:55+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-mac",
+  "nodes": "1",
+  "checkpoint": "Vontra/Qwen3.8-27B-MLX-4bit",
+  "platform": "Apple M3 Max",
+  "tensorfold_commit": "2f8e514",
+  "powermode": "2"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 90.48,
+   "decode_tps_min": 83.24,
+   "decode_tps_max": 93.21,
+   "decode_tps_all": [
+    83.24,
+    86.92,
+    90.48,
+    93.21,
+    92.33
+   ],
+   "ttft_s_median": 0.175,
+   "tokens": 64,
+   "draft_acceptance": 0.774,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"Compute the first n numbers of the Fibonacci sequence.\n    \n    The Fibonacci sequence is defined as:\n        F(0) = 0\n        F(1) = 1\n        F(k",
+   "text_sha256": [
+    "79ce6d5e3acbc277",
+    "4fc9f658269f7949",
+    "a21122edf13beaa0",
+    "01576fac3a287656",
+    "29b672576524db63"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 46.4,
+   "decode_tps_min": 42.67,
+   "decode_tps_max": 65.09,
+   "decode_tps_all": [
+    46.4,
+    47.0,
+    43.7,
+    65.09,
+    42.67
+   ],
+   "ttft_s_median": 0.176,
+   "tokens": 64,
+   "draft_acceptance": 0.365,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### Part 1: How Matrix Multiplication Uses a GPU (Plain English)\n\nImagine you have a giant spreadsheet (Matrix A) and another giant spreadsheet (Matrix B). You need to multiply them to get a result (M",
+   "text_sha256": [
+    "9f83d608dead7ecf",
+    "e09903bad2f21a42",
+    "3ff3afaef481aeb8",
+    "5083b404d09bc84b",
+    "29b29b6a1130ddd4"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 86.98,
+   "decode_tps_min": 86.21,
+   "decode_tps_max": 88.09,
+   "decode_tps_all": [
+    86.98,
+    86.65,
+    86.21,
+    88.09,
+    87.22
+   ],
+   "ttft_s_median": 0.173,
+   "tokens": 64,
+   "draft_acceptance": 0.812,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"\n    Compute the first n numbers of the Fibonacci sequence.\n    \n    Args:\n        n: The number of Fibonacci numbers to generate.\n        \n    Ret",
+   "text_sha256": [
+    "3ad63ae9770da2b6",
+    "3ad63ae9770da2b6",
+    "3ad63ae9770da2b6",
+    "3ad63ae9770da2b6",
+    "3ad63ae9770da2b6"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 46.05,
+   "decode_tps_min": 43.83,
+   "decode_tps_max": 46.36,
+   "decode_tps_all": [
+    46.36,
+    46.05,
+    46.06,
+    45.72,
+    43.83
+   ],
+   "ttft_s_median": 0.177,
+   "tokens": 64,
+   "draft_acceptance": 0.333,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### How Matrix Multiplication Uses a GPU (In Plain English)\n\nTo understand how a GPU handles matrix multiplication, it helps to compare it to a CPU (the main processor in your computer).\n\n#### The Ana",
+   "text_sha256": [
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff",
+    "e2acc0d979da73ff"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "code-greedy-512",
+   "greedy": true,
+   "decode_tps_median": 67.06,
+   "decode_tps_min": 61.99,
+   "decode_tps_max": 67.16,
+   "decode_tps_all": [
+    67.06,
+    67.16,
+    61.99
+   ],
+   "ttft_s_median": 0.357,
+   "tokens": 512,
+   "draft_acceptance": 0.609,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "```python\n\"\"\"\nLRU Cache Module\n\nThis module implements a Least Recently Used (LRU) cache with full type hints,\ndocstrings, and comprehensive pytest unit tests.\n\"\"\"\n\nfrom __future__ import annotations\n",
+   "text_sha256": [
+    "dd6bbd593fc375c3",
+    "dd6bbd593fc375c3",
+    "dd6bbd593fc375c3"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "code-sampled-512",
+   "greedy": false,
+   "decode_tps_median": 57.96,
+   "decode_tps_min": 52.82,
+   "decode_tps_max": 59.31,
+   "decode_tps_all": [
+    57.96,
+    52.82,
+    59.31
+   ],
+   "ttft_s_median": 0.34,
+   "tokens": 512,
+   "draft_acceptance": 0.524,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "```python\n\"\"\"\nlru_cache.py\n============\n\nA complete LRU (Least Recently Used) cache implementation in Python.\n\nThe `LRUCache` class provides O(1) average-time-complexity `get` and `put`\noperations usi",
+   "text_sha256": [
+    "6929fa573e893652",
+    "71704566e0bd39b0",
+    "9984bb8dcf9f0c72"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "prose-greedy-512",
+   "greedy": true,
+   "decode_tps_median": 35.83,
+   "decode_tps_min": 35.71,
+   "decode_tps_max": 36.33,
+   "decode_tps_all": [
+    35.71,
+    35.83,
+    36.33
+   ],
+   "ttft_s_median": 0.327,
+   "tokens": 512,
+   "draft_acceptance": 0.286,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# The Arteries of Antiquity: A History of the Silk Road\n\nThe phrase \"Silk Road\" evokes images of camels laden with precious cargo, desert caravans, and the distant hum of trade between East and West. ",
+   "text_sha256": [
+    "284519fc17a91cb9",
+    "284519fc17a91cb9",
+    "284519fc17a91cb9"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "prose-sampled-512",
+   "greedy": false,
+   "decode_tps_median": 36.29,
+   "decode_tps_min": 35.92,
+   "decode_tps_max": 36.31,
+   "decode_tps_all": [
+    36.31,
+    36.29,
+    35.92
+   ],
+   "ttft_s_median": 0.318,
+   "tokens": 512,
+   "draft_acceptance": 0.266,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Arteries of the Ancient World: The History and Legacy of the Silk Road\n\nThe \"Silk Road\" is one of the most evocative terms in human history, yet it is a modern invention, coined in the late 19th cen",
+   "text_sha256": [
+    "d020db8249c34834",
+    "20207c2e58e05005",
+    "5793632e29dc0065"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "json-greedy-512",
+   "greedy": true,
+   "decode_tps_median": 96.33,
+   "decode_tps_min": 95.91,
+   "decode_tps_max": 97.22,
+   "decode_tps_all": [
+    97.22,
+    96.33,
+    95.91
+   ],
+   "ttft_s_median": 0.317,
+   "tokens": 512,
+   "draft_acceptance": 0.835,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "[\n  {\n    \"id\": 1,\n    \"name\": \"Alice Johnson\",\n    \"email\": \"alice.johnson@company.com\",\n    \"department\": \"Engineering\",\n    \"title\": \"Senior Software Engineer\",\n    \"salary\": 120000,\n    \"start_dat",
+   "text_sha256": [
+    "bcb2fb87ecf372c6",
+    "bcb2fb87ecf372c6",
+    "bcb2fb87ecf372c6"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "json-sampled-512",
+   "greedy": false,
+   "decode_tps_median": 90.3,
+   "decode_tps_min": 87.78,
+   "decode_tps_max": 92.85,
+   "decode_tps_all": [
+    92.85,
+    90.3,
+    87.78
+   ],
+   "ttft_s_median": 0.316,
+   "tokens": 512,
+   "draft_acceptance": 0.783,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "[\n  {\n    \"id\": 1,\n    \"name\": \"Alice Johnson\",\n    \"email\": \"alice.johnson@corp.com\",\n    \"department\": \"Engineering\",\n    \"title\": \"Senior Engineer\",\n    \"salary\": 120000,\n    \"start_date\": \"2021-03",
+   "text_sha256": [
+    "eb0ceb741a51948c",
+    "6e356141453d0972",
+    "e5c3f4ed0011ace0"
+   ]
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 4.0,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 90.48446334145208,
+     "serial_tps": 22.62971860897931
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 90.78668821269339,
+     "serial_tps": 22.704732755906456
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 91.50245957943594,
+     "serial_tps": 22.81691394649051
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 42.47866910043538,
+     "serial_tps": 22.80018741571614
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 39.46857366980743,
+     "serial_tps": 22.71197225837881
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 39.506359028180775,
+     "serial_tps": 22.485155211771854
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 99.28559665559322,
+     "serial_tps": 22.608497213110343
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 85.50817565060687,
+     "serial_tps": 22.503429552259345
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 90.51446516447926,
+     "serial_tps": 22.5623871528018
+    }
+   ]
+  }
+ ]
+}

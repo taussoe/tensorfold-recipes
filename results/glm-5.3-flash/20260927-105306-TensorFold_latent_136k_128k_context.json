@@ -1,0 +1,33 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "TensorFold latent 136k (128k context)",
+ "model": "GLM-5.3-Flash",
+ "url": "http://<server>:8080",
+ "started_utc": "2026-09-27T10:53:06+00:00",
+ "finished_utc": "2026-09-27T11:05:06+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "TensorFold (engine/ long-context, latent cache)"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 130839,
+   "ttft_s": 647.32,
+   "prefill_tps": 202.1,
+   "decode_tps_median": 43.68,
+   "needle_found": true,
+   "followup_ttft_s": 1.42,
+   "followup_prompt_tokens": 131111,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 47.52,
+   "sample": "The value of `DEPLOY_CODE` is **\"ORCA-8359\"**.\n\n## Repository Architecture\n\nThis repository is a large, highly repetitive collection of ~300 small Python modules, each following an identical structura"
+  }
+ ]
+}

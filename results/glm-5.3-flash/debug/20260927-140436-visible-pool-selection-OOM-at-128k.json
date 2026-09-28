@@ -1,0 +1,33 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "engine/ q4 + visible-pool selection",
+ "model": "GLM-5.3-Flash",
+ "url": "http://<server>:8080",
+ "started_utc": "2026-09-27T14:04:36+00:00",
+ "finished_utc": "2026-09-27T14:06:03+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "TensorFold engine/ (latent q4, prefill 1024, visible-pool selection)"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 55.43,
+   "prefill_tps": 591.2,
+   "decode_tps_median": 39.51,
+   "needle_found": true,
+   "followup_ttft_s": 0.45,
+   "followup_prompt_tokens": 33042,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 49.26,
+   "sample": "`DEPLOY_CODE = \"ORCA-7409\"`\n\n## Repository Architecture\n\nThis repository is a collection of ~76 small, structurally identical Python modules, each following the same template. Here's the breakdown:\n\n#"
+  }
+ ]
+}

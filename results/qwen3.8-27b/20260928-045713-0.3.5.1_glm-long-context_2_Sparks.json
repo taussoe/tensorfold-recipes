@@ -1,0 +1,232 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-27b",
+ "label": "0.3.5.1 + glm-long-context, 2 Sparks",
+ "model": "Qwen3.8-27B",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T04:57:13+00:00",
+ "finished_utc": "2026-09-28T05:01:00+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/Qwen3.8-27B-MLX-4bit",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-7a01d26757",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 83.21,
+   "decode_tps_min": 77.29,
+   "decode_tps_max": 143.72,
+   "decode_tps_all": [
+    83.21,
+    143.72,
+    97.04,
+    82.64,
+    77.29
+   ],
+   "ttft_s_median": 0.065,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\nThe user wants a short Python function that computes the Fibonacci sequence, plus an explanation. Let me think about what approach to take:\n\nOptions:\n1. Iterative approach (loop) - simple, e",
+   "text_sha256": [
+    "f1b265f0abb0bbfa",
+    "0d80014b5b45c535",
+    "993cdf26235ab2a7",
+    "a8158d414d5e65e2",
+    "09c40ef7e64b04df"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 72.09,
+   "decode_tps_min": 61.13,
+   "decode_tps_max": 77.71,
+   "decode_tps_all": [
+    77.24,
+    61.41,
+    72.09,
+    77.71,
+    61.13
+   ],
+   "ttft_s_median": 0.074,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### Part 1: How Matrix Multiplication Uses a GPU (Plain English)\n\nImagine you have a giant spreadsheet (Matrix A) and another giant spreadsheet (Matrix B). You need to multiply them to get a result (M",
+   "text_sha256": [
+    "9f83d608dead7ecf",
+    "5c12127bceb5aaf7",
+    "51e09cecf5dd642b",
+    "9ec6ece5a3c16b24",
+    "7bbbd8bcbabae7ad"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 82.96,
+   "decode_tps_min": 82.91,
+   "decode_tps_max": 83.88,
+   "decode_tps_all": [
+    82.95,
+    83.88,
+    82.91,
+    83.21,
+    82.96
+   ],
+   "ttft_s_median": 0.07,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\nThe user wants a short Python function that computes the Fibonacci sequence, along with an explanation. Let me think about what would be most useful:\n\nOptions for computing Fibonacci:\n1. Rec",
+   "text_sha256": [
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9",
+    "7e4aac217dea7ea9"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 71.68,
+   "decode_tps_min": 71.48,
+   "decode_tps_max": 72.53,
+   "decode_tps_all": [
+    71.68,
+    71.67,
+    71.48,
+    72.53,
+    71.91
+   ],
+   "ttft_s_median": 0.073,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### How Matrix Multiplication Uses a GPU (In Plain English)\n\nTo understand how a GPU handles matrix multiplication, it helps to compare it to a CPU (the main processor in your computer).\n\n**The CPU An",
+   "text_sha256": [
+    "5029c6e3a60015b9",
+    "5029c6e3a60015b9",
+    "5029c6e3a60015b9",
+    "5029c6e3a60015b9",
+    "5029c6e3a60015b9"
+   ]
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 4.8,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 96.60119131023296,
+     "serial_tps": 20.139559916692093
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 79.699028681658,
+     "serial_tps": 24.464474614217096
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 145.25514808474344,
+     "serial_tps": 24.232878624192896
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 67.58396008691707,
+     "serial_tps": 24.396381349891993
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 69.39549722949224,
+     "serial_tps": 24.013464815636482
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 57.78813450660809,
+     "serial_tps": 24.344618481393123
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 144.6092009773676,
+     "serial_tps": 24.373913418074352
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 143.36656393025322,
+     "serial_tps": 24.37482643373997
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 131.9124056665511,
+     "serial_tps": 24.339912619017323
+    }
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 33141,
+   "ttft_s": 17.01,
+   "prefill_tps": 1948.6,
+   "decode_tps_median": 55.91,
+   "needle_found": true,
+   "followup_ttft_s": 0.33,
+   "followup_prompt_tokens": 33423,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 66.68,
+   "sample": "DEPLOY_CODE = \"ORCA-7409\"\n\nThe repository is a modular Python codebase organized by domain entities, where each module contains a dataclass representing a specific relationship between two system comp"
+  },
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 131249,
+   "ttft_s": 102.78,
+   "prefill_tps": 1277.0,
+   "decode_tps_median": 23.67,
+   "needle_found": true,
+   "followup_ttft_s": 0.71,
+   "followup_prompt_tokens": 131530,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 27.06,
+   "sample": "`ORCA-8359`\n\nThe repository is a modular Python codebase organized into domain-specific packages, where each module contains a dataclass representing a specific entity and its associated synchronizati"
+  }
+ ]
+}

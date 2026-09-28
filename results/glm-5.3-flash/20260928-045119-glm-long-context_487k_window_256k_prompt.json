@@ -1,0 +1,38 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "glm-long-context, 487k window, 256k prompt",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T04:51:19+00:00",
+ "finished_utc": "2026-09-28T04:55:54+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-7a01d26757",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-262144",
+   "prompt_tokens": 262099,
+   "ttft_s": 253.79,
+   "prefill_tps": 1032.7,
+   "decode_tps_median": 40.09,
+   "needle_found": true,
+   "followup_ttft_s": 0.95,
+   "followup_prompt_tokens": 262371,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 44.09,
+   "sample": "**DEPLOY_CODE = \"ORCA-1895\"**\n\n## Repository Architecture\n\nThis codebase is a large, highly repetitive collection of ~580 small modules, all following the same template. Here's the breakdown:\n\n### 1. "
+  }
+ ]
+}

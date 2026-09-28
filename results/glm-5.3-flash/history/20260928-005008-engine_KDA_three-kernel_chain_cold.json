@@ -1,0 +1,52 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "engine KDA three-kernel chain, cold",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T00:50:08+00:00",
+ "finished_utc": "2026-09-28T00:55:08+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-7475e7d0ac",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 49.0,
+   "prefill_tps": 668.8,
+   "decode_tps_median": 39.2,
+   "needle_found": true,
+   "followup_ttft_s": 0.28,
+   "followup_prompt_tokens": 33042,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 47.26,
+   "sample": "**DEPLOY_CODE = \"ORCA-7409\"**\n\n## Repository Architecture\n\nThis repository is a collection of ~76 small, structurally identical Python modules, each following the same template. They appear to be gene"
+  },
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 130839,
+   "ttft_s": 205.05,
+   "prefill_tps": 638.1,
+   "decode_tps_median": 32.28,
+   "needle_found": true,
+   "followup_ttft_s": 0.51,
+   "followup_prompt_tokens": 131111,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 44.69,
+   "sample": "`DEPLOY_CODE = \"ORCA-8359\"`\n\n## Repository Architecture\n\nThis repository is a large, highly repetitive collection of ~300 small Python modules, each following an identical structural pattern. Here's t"
+  }
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "latent absorb/expand GEMM",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T06:57:47+00:00",
+ "finished_utc": "2026-09-28T06:58:02+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-5a2e4ce006",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "codechat",
+   "cell": "code-chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 54.97,
+   "decode_tps_min": 50.29,
+   "decode_tps_max": 59.28,
+   "decode_tps_all": [
+    59.28,
+    50.29,
+    54.97,
+    56.72,
+    53.23
+   ],
+   "ttft_s_median": 0.168,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Fibonacci Sequence in Python\n\nHere's a simple function that generates the first `n` Fibonacci numbers:\n\n```python\ndef fibonacci(n):\n    \"\"\"Return a list of the first n Fibonacci numbers.\"\"\"\n    sequ",
+   "text_sha256": [
+    "dadcac7771a55c12",
+    "385e1504559b0df4",
+    "74d94b764d86df55",
+    "dadcac7771a55c12",
+    "80842a3d4ecc5df4"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 57.91,
+   "decode_tps_min": 57.53,
+   "decode_tps_max": 58.29,
+   "decode_tps_all": [
+    57.82,
+    58.2,
+    57.91,
+    57.53,
+    58.29
+   ],
+   "ttft_s_median": 0.167,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Fibonacci Sequence in Python\n\nHere's a simple function that generates the first `n` Fibonacci numbers:\n\n```python\ndef fibonacci(n):\n    \"\"\"Return a list of the first n Fibonacci numbers.\"\"\"\n    sequ",
+   "text_sha256": [
+    "dadcac7771a55c12",
+    "dadcac7771a55c12",
+    "dadcac7771a55c12",
+    "dadcac7771a55c12",
+    "dadcac7771a55c12"
+   ]
+  }
+ ]
+}

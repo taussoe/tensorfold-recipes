@@ -1,0 +1,38 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "latent absorb/expand GEMM, 258k",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T06:53:40+00:00",
+ "finished_utc": "2026-09-28T06:57:47+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-5a2e4ce006",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-258048",
+   "prompt_tokens": 257711,
+   "ttft_s": 226.35,
+   "prefill_tps": 1138.6,
+   "decode_tps_median": 42.79,
+   "needle_found": true,
+   "followup_ttft_s": 0.88,
+   "followup_prompt_tokens": 257983,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 44.84,
+   "sample": "The value of `DEPLOY_CODE` is **`ORCA-9376`**.\n\n## Repository Architecture\n\nThis repository is a large, highly repetitive \"sync-utilities\" codebase \u2014 hundreds of small modules, each following an ident"
+  }
+ ]
+}

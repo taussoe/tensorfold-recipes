@@ -1,0 +1,218 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "upstream 0.3.5.1, 36k context",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T03:58:16+00:00",
+ "finished_utc": "2026-09-28T04:00:50+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-b39a310c71",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 50.95,
+   "decode_tps_min": 39.01,
+   "decode_tps_max": 56.9,
+   "decode_tps_all": [
+    43.5,
+    56.9,
+    39.01,
+    56.89,
+    50.95
+   ],
+   "ttft_s_median": 0.121,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Also, write a function that returns the sum of all the even Fibonacci numbers less than n.\n\nShort Answer: The Fibonacci sequence is a series of numbers where each number is the sum of the two precedi",
+   "text_sha256": [
+    "8ab176348fc3f889",
+    "5c0abad25a6a9136",
+    "7b89af82dca6359e",
+    "efed57b53933e2ba",
+    "dc69d397463973a1"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 42.71,
+   "decode_tps_min": 40.67,
+   "decode_tps_max": 44.46,
+   "decode_tps_all": [
+    43.99,
+    42.47,
+    42.71,
+    40.67,
+    44.46
+   ],
+   "ttft_s_median": 0.186,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU, in Plain English\n\n**The big idea:** A GPU is like a huge team of workers who all do simple math at the same time, while a CPU is like a few very fast workers doing on",
+   "text_sha256": [
+    "b0effa525bad26fd",
+    "af7ce4dec531803a",
+    "7ee94c65da29c604",
+    "e22067e32b8bcf8c",
+    "efaf83ff76fd0a84"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 55.92,
+   "decode_tps_min": 55.49,
+   "decode_tps_max": 56.16,
+   "decode_tps_all": [
+    56.16,
+    55.49,
+    55.92,
+    55.56,
+    55.95
+   ],
+   "ttft_s_median": 0.119,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, starting from 0 and 1. The sequence goes: 0, 1, 1, 2, 3, 5, 8, 13, 21, and so on. To",
+   "text_sha256": [
+    "2c3d7b5e050d403d",
+    "2c3d7b5e050d403d",
+    "2c3d7b5e050d403d",
+    "2c3d7b5e050d403d",
+    "2c3d7b5e050d403d"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 47.84,
+   "decode_tps_min": 47.8,
+   "decode_tps_max": 48.23,
+   "decode_tps_all": [
+    47.8,
+    48.23,
+    47.8,
+    47.91,
+    47.84
+   ],
+   "ttft_s_median": 0.186,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU, in Plain English\n\n## The Big Idea\n\nA CPU is like a few brilliant chefs who cook one dish at a time, very fast. A GPU is like a thousand line cooks who each handle one",
+   "text_sha256": [
+    "ce7837e35e4f0016",
+    "ce7837e35e4f0016",
+    "ce7837e35e4f0016",
+    "ce7837e35e4f0016",
+    "ce7837e35e4f0016"
+   ]
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.66,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 56.097542985219825,
+     "serial_tps": 33.43717222563356
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 45.14445660643872,
+     "serial_tps": 33.882866054837855
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 55.191492653440726,
+     "serial_tps": 33.316008390133426
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 47.967988044302615,
+     "serial_tps": 33.46053343308717
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 46.46686424521715,
+     "serial_tps": 33.769126770118824
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 42.684159051145166,
+     "serial_tps": 31.72763029259344
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 60.739127380944446,
+     "serial_tps": 33.727913555089074
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 56.87350722424268,
+     "serial_tps": 33.67842726709065
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 56.4096044544385,
+     "serial_tps": 33.6486477391018
+    }
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 52.33,
+   "prefill_tps": 626.2,
+   "decode_tps_median": 110.37,
+   "needle_found": false,
+   "followup_ttft_s": 0.18,
+   "followup_prompt_tokens": 32818,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 109.19,
+   "sample": "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+  }
+ ]
+}

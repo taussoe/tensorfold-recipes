@@ -1,0 +1,181 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "vLLM Mia EXL3 850k (long, concurrency)",
+ "model": "GLM-5.3-Flash-EXL3",
+ "url": "http://<server>:8888",
+ "started_utc": "2026-09-27T09:51:41+00:00",
+ "finished_utc": "2026-09-27T09:59:18+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "vLLM (Mia-AiLab EXL3 recipe)"
+ },
+ "cells": [
+  {
+   "suite": "long",
+   "cell": "code-greedy-512",
+   "greedy": true,
+   "decode_tps_median": 50.37,
+   "decode_tps_min": 44.62,
+   "decode_tps_max": 50.42,
+   "decode_tps_all": [
+    44.62,
+    50.37,
+    50.42
+   ],
+   "ttft_s_median": 0.6,
+   "tokens": 512,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# LRU Cache Implementation with Tests\n\nBelow is a complete, production-quality module followed by comprehensive pytest tests.\n\n## `lru_cache.py`\n\n```python\n\"\"\"\nlru_cache.py\n\nA thread-safe LRU (Least R",
+   "text_sha256": [
+    "71999333f04b6642",
+    "3be2a1baa8dc03cd",
+    "3be2a1baa8dc03cd"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "code-sampled-512",
+   "greedy": false,
+   "decode_tps_median": 45.7,
+   "decode_tps_min": 44.66,
+   "decode_tps_max": 51.02,
+   "decode_tps_all": [
+    45.7,
+    44.66,
+    51.02
+   ],
+   "ttft_s_median": 0.485,
+   "tokens": 512,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# LRU Cache Implementation with Full Test Suite\n\n```python\n\"\"\"\nlru_cache.py\n\nAn efficient LRU (Least Recently Used) cache implementation with:\n- O(1) get and put operations using a hash map + doubly l",
+   "text_sha256": [
+    "2191d19904da912c",
+    "cbd2aa07ddc6c366",
+    "edeb7ebf89a2788d"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "prose-greedy-512",
+   "greedy": true,
+   "decode_tps_median": 29.01,
+   "decode_tps_min": 26.87,
+   "decode_tps_max": 29.5,
+   "decode_tps_all": [
+    29.01,
+    26.87,
+    29.5
+   ],
+   "ttft_s_median": 0.361,
+   "tokens": 512,
+   "slow_runs_flagged": false,
+   "attempts": 2,
+   "sample": "# The Silk Road: Threads of Connection Across Eurasia\n\n## Introduction\n\nThe Silk Road stands as one of history's most remarkable networks of exchange\u2014a web of trade routes stretching some 6,400 kilome",
+   "text_sha256": [
+    "5a25bcfb071dd04a",
+    "6d6ad60f0fa7b67d",
+    "bc44d482e27dc843"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "prose-sampled-512",
+   "greedy": false,
+   "decode_tps_median": 27.5,
+   "decode_tps_min": 24.07,
+   "decode_tps_max": 27.57,
+   "decode_tps_all": [
+    27.57,
+    27.5,
+    24.07
+   ],
+   "ttft_s_median": 0.412,
+   "tokens": 512,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# The Silk Road: Threads of Connection Across Eurasia\n\n## Introduction\n\nThe Silk Road stands as one of history's most remarkable networks of exchange\u2014a web of trade routes stretching some 6,400 kilome",
+   "text_sha256": [
+    "a3e8b30b50717686",
+    "af43fc06cb20e93e",
+    "39baa398393c1582"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "json-greedy-512",
+   "greedy": true,
+   "decode_tps_median": 54.17,
+   "decode_tps_min": 50.14,
+   "decode_tps_max": 58.09,
+   "decode_tps_all": [
+    54.17,
+    50.14,
+    58.09
+   ],
+   "ttft_s_median": 0.578,
+   "tokens": 512,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "[\n  {\n    \"id\": 1,\n    \"name\": \"Ava Thompson\",\n    \"email\": \"ava.thompson@northwind.example.com\",\n    \"department\": \"Engineering\",\n    \"title\": \"Senior Software Engineer\",\n    \"salary\": 128000,\n    \"s",
+   "text_sha256": [
+    "d042dc618e3f4736",
+    "e504df0d5b5bfa2f",
+    "e504df0d5b5bfa2f"
+   ]
+  },
+  {
+   "suite": "long",
+   "cell": "json-sampled-512",
+   "greedy": false,
+   "decode_tps_median": 56.77,
+   "decode_tps_min": 41.28,
+   "decode_tps_max": 57.97,
+   "decode_tps_all": [
+    56.77,
+    41.28,
+    57.97
+   ],
+   "ttft_s_median": 0.638,
+   "tokens": 512,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "```json\n[\n  {\n    \"id\": 1,\n    \"name\": \"Ava Thompson\",\n    \"email\": \"ava.thompson@northwind-corp.example.com\",\n    \"department\": \"Engineering\",\n    \"title\": \"Senior Software Engineer\",\n    \"salary\": 1",
+   "text_sha256": [
+    "a3c705f0bf8a0a6b",
+    "f7e608fb0cc1353b",
+    "be43261a78e079dc"
+   ]
+  },
+  {
+   "suite": "concurrency",
+   "cell": "streams-1",
+   "streams": 1,
+   "decode_tps_median": 29.81,
+   "aggregate_tps": 27.18,
+   "ttft_s_median": 0.858
+  },
+  {
+   "suite": "concurrency",
+   "cell": "streams-2",
+   "streams": 2,
+   "decode_tps_median": 22.53,
+   "aggregate_tps": 41.51,
+   "ttft_s_median": 0.653
+  },
+  {
+   "suite": "concurrency",
+   "cell": "streams-4",
+   "streams": 4,
+   "decode_tps_median": 17.16,
+   "aggregate_tps": 61.56,
+   "ttft_s_median": 1.301
+  }
+ ]
+}

@@ -1,0 +1,204 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "engine MoE order + cache budget, second pass",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-27T22:38:39+00:00",
+ "finished_utc": "2026-09-27T22:40:12+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-0f04d0d94e",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 44.59,
+   "decode_tps_min": 33.24,
+   "decode_tps_max": 48.24,
+   "decode_tps_all": [
+    39.33,
+    48.24,
+    33.24,
+    46.46,
+    44.59
+   ],
+   "ttft_s_median": 0.138,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Also, write a function that returns the sum of all the even Fibonacci numbers less than n.\n\nShort Answer\n\nThis code is a Python solution to find the sum of all even Fibonacci numbers less than n. It ",
+   "text_sha256": [
+    "4ad09f2d1820997e",
+    "5c0abad25a6a9136",
+    "9d33c82a015ecb5b",
+    "efed57b53933e2ba",
+    "b0ca05307228e0b6"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 38.19,
+   "decode_tps_min": 36.6,
+   "decode_tps_max": 39.81,
+   "decode_tps_all": [
+    36.6,
+    39.18,
+    39.81,
+    38.19,
+    36.68
+   ],
+   "ttft_s_median": 0.222,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU\n\n## The Plain-English Explanation\n\nImagine you run a bakery, and you need to calculate the price of 100 different orders, where each order combines ingredients in diff",
+   "text_sha256": [
+    "73484d7f04fcd733",
+    "c9c869b9cf1f9542",
+    "8aec96544f50ec14",
+    "ce6e6a7230bbb6f7",
+    "d0e63e3cd4f2bcf0"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 56.92,
+   "decode_tps_min": 54.5,
+   "decode_tps_max": 57.9,
+   "decode_tps_all": [
+    56.92,
+    54.5,
+    57.01,
+    55.29,
+    57.9
+   ],
+   "ttft_s_median": 0.133,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 25",
+   "text_sha256": [
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 38.25,
+   "decode_tps_min": 37.58,
+   "decode_tps_max": 39.01,
+   "decode_tps_all": [
+    37.58,
+    37.67,
+    39.01,
+    38.25,
+    38.55
+   ],
+   "ttft_s_median": 0.216,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU, in Plain English\n\n## The Big Idea\n\nA CPU is like a few brilliant chefs who can cook anything, but one dish at a time. A GPU is like a stadium full of thousands of ave",
+   "text_sha256": [
+    "742c6f711d49f8c3",
+    "742c6f711d49f8c3",
+    "742c6f711d49f8c3",
+    "742c6f711d49f8c3",
+    "742c6f711d49f8c3"
+   ]
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.6,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 55.56571319431593,
+     "serial_tps": 31.07733010119429
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 39.00446435645858,
+     "serial_tps": 30.771733988337175
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 49.606929728297835,
+     "serial_tps": 30.9521191972957
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 39.501209512937855,
+     "serial_tps": 30.979976669287662
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 37.817058105028515,
+     "serial_tps": 30.769826442963485
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 42.23875005900142,
+     "serial_tps": 30.9866690480568
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 53.894207543736826,
+     "serial_tps": 31.233423754219064
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 53.958597932482284,
+     "serial_tps": 29.873584903673194
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 52.450050657914694,
+     "serial_tps": 31.186811191759787
+    }
+   ]
+  }
+ ]
+}

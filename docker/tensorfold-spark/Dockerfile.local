@@ -1,0 +1,17 @@
+# TensorFold for DGX Spark built from this repo's engine/ checkout (our long-context branch) instead of a pinned
+# GitHub commit. The recipes build it when TENSORFOLD_SOURCE=local (lib/common.sh), sending engine/ as the context.
+FROM nvcr.io/nvidia/pytorch:26.07-py3
+
+COPY . /opt/tensorfold
+RUN pip install --no-cache-dir /opt/tensorfold && tensorfold --version
+
+# GB10 only: the container's default list (8.0 ... 12.0+PTX) makes torch build TensorFold's CUDA extensions for
+# GPUs without FP8 MMA, which 0.3.5's prefill kernels need, and takes longer.
+ENV TORCH_CUDA_ARCH_LIST=12.1 \
+    TENSORFOLD_NO_UPDATE_CHECK=1 \
+    HF_XET_HIGH_PERFORMANCE=1 \
+    PYTHONUNBUFFERED=1 \
+    TORCH_EXTENSIONS_DIR=/kernel-cache/torch_extensions \
+    TRITON_CACHE_DIR=/kernel-cache/triton
+
+LABEL org.opencontainers.image.title="tensorfold-spark (local engine/)"

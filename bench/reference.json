@@ -1,0 +1,169 @@
+{
+ "about": "Published numbers to compare your own runs against. The 'standard' cells use exactly the protocol of bench.py's standard suite (TensorFold's tools/bench_openai.py): decode tok/s, one stream, 64-token replies, median of seeds 1234-1238. Cells: code-sampled, chat-sampled, code-greedy, chat-greedy.",
+ "rows": [
+  {
+   "recipe": "qwen3.8-27b",
+   "platform": "1x DGX Spark",
+   "engine": "TensorFold 0.3.4 + DFlash2",
+   "standard": [
+    49.6,
+    45.8,
+    49.2,
+    45.9
+   ],
+   "source": "TensorFold docs/recipes/qwen3.8-27b.md"
+  },
+  {
+   "recipe": "qwen3.8-27b",
+   "platform": "1x DGX Spark",
+   "engine": "vLLM NVFP4, MTP=3",
+   "standard": [
+    17.7,
+    15.0,
+    17.7,
+    17.0
+   ],
+   "source": "TensorFold docs/recipes/qwen3.8-27b.md"
+  },
+  {
+   "recipe": "qwen3.8-27b",
+   "platform": "2x DGX Spark",
+   "engine": "TensorFold 0.3.4 + DFlash2",
+   "standard": [
+    82.4,
+    58.9,
+    76.2,
+    71.1
+   ],
+   "source": "TensorFold docs/recipes/qwen3.8-27b.md"
+  },
+  {
+   "recipe": "qwen3.8-27b",
+   "platform": "2x DGX Spark",
+   "engine": "vLLM NVFP4, MTP=3, TP2",
+   "standard": [
+    33.1,
+    30.4,
+    31.6,
+    30.5
+   ],
+   "source": "TensorFold docs/recipes/qwen3.8-27b.md"
+  },
+  {
+   "recipe": "qwen3.8-27b-mac",
+   "platform": "M3 Ultra, 256 GB",
+   "engine": "TensorFold 0.3.4 + DFlash2 (3 seeds)",
+   "standard": [
+    141.3,
+    73.9,
+    158.4,
+    74.2
+   ],
+   "source": "TensorFold docs/recipes/qwen3.8-27b.md#macs-without-tensor-units-m1-to-m4"
+  },
+  {
+   "recipe": "qwen3.8-27b-mac",
+   "platform": "M3 Ultra, 256 GB",
+   "engine": "TensorFold serial (--no-drafts)",
+   "standard": [
+    38.2,
+    38.2,
+    39.3,
+    39.3
+   ],
+   "source": "TensorFold docs/recipes/qwen3.8-27b.md#macs-without-tensor-units-m1-to-m4"
+  },
+  {
+   "recipe": "qwen3.8-flash-next",
+   "platform": "1x DGX Spark",
+   "engine": "TensorFold 0.3.4, MTP",
+   "standard": [
+    68.3,
+    58.5,
+    73.1,
+    60.2
+   ],
+   "source": "TensorFold docs/recipes/qwen3.8-flash-next.md"
+  },
+  {
+   "recipe": "qwen3.8-flash-next",
+   "platform": "1x DGX Spark",
+   "engine": "vLLM NVFP4, MTP=3",
+   "standard": [
+    42.4,
+    33.2,
+    40.9,
+    37.6
+   ],
+   "source": "TensorFold docs/recipes/qwen3.8-flash-next.md"
+  },
+  {
+   "recipe": "qwen3.8-flash-next",
+   "platform": "2x DGX Spark",
+   "engine": "TensorFold 0.3.4, MTP",
+   "standard": [
+    103.8,
+    84.0,
+    96.2,
+    100.2
+   ],
+   "source": "TensorFold docs/recipes/qwen3.8-flash-next.md"
+  },
+  {
+   "recipe": "qwen3.8-flash-next",
+   "platform": "2x DGX Spark",
+   "engine": "vLLM NVFP4, MTP=3, TP2+EP",
+   "standard": [
+    46.4,
+    41.4,
+    55.2,
+    50.7
+   ],
+   "source": "TensorFold docs/recipes/qwen3.8-flash-next.md"
+  },
+  {
+   "recipe": "glm-5.3-flash",
+   "platform": "2x DGX Spark",
+   "engine": "TensorFold 0.3.4, auto (MTP + DFlash2)",
+   "standard": [
+    49.4,
+    43.3,
+    66.3,
+    45.2
+   ],
+   "source": "TensorFold docs/recipes/glm-5.3-flash.md"
+  },
+  {
+   "recipe": "glm-5.3-flash",
+   "platform": "2x DGX Spark",
+   "engine": "TensorFold 0.3.4, MTP only (no DFlash2)",
+   "standard": [
+    49.3,
+    43.2,
+    57.8,
+    37.2
+   ],
+   "source": "TensorFold docs/recipes/glm-5.3-flash.md (a:0.6:0.85 sampled, c3:0.35 greedy)"
+  },
+  {
+   "recipe": "glm-5.3-flash",
+   "platform": "2x DGX Spark",
+   "engine": "vLLM EXL3 (Mia-AiLab), MTP=3",
+   "standard": [
+    24.5,
+    24.3,
+    32.2,
+    24.7
+   ],
+   "source": "TensorFold docs/recipes/glm-5.3-flash.md"
+  },
+  {
+   "recipe": "glm-5.3-flash",
+   "platform": "2x DGX Spark",
+   "engine": "vLLM EXL3 (Mia-AiLab recipe), DFlash2 k=7, 850k context",
+   "standard": null,
+   "other": "structured/code 62.9 tok/s (1 stream), prose 36.1 tok/s (1 stream), prefill ~1,500 tok/s cold up to 256k",
+   "source": "MiaAI-Lab/GLM-5.3-Flash-EXL3-2x-DGX-Sparks README (sparkDash protocol, not the standard cells)"
+  }
+ ]
+}

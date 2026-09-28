@@ -1,0 +1,38 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "upstream 0.3.5.1, 36k context, warm",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T04:00:50+00:00",
+ "finished_utc": "2026-09-28T04:02:01+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-b39a310c71",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 52.25,
+   "prefill_tps": 627.1,
+   "decode_tps_median": 110.99,
+   "needle_found": false,
+   "followup_ttft_s": 0.17,
+   "followup_prompt_tokens": 32818,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 110.04,
+   "sample": "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+  }
+ ]
+}

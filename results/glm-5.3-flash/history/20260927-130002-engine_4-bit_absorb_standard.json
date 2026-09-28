@@ -1,0 +1,127 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "engine/ 4-bit absorb (standard)",
+ "model": "GLM-5.3-Flash",
+ "url": "http://<server>:8080",
+ "started_utc": "2026-09-27T13:00:02+00:00",
+ "finished_utc": "2026-09-27T13:00:40+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "TensorFold engine/ (latent q4, prefill 1024)"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 48.35,
+   "decode_tps_min": 37.2,
+   "decode_tps_max": 56.15,
+   "decode_tps_all": [
+    45.4,
+    50.57,
+    37.2,
+    56.15,
+    48.35
+   ],
+   "ttft_s_median": 0.147,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Also, write a function that returns the sum of all the even Fibonacci numbers less than n.\n\nFilo tutor solution\n\nStudents who ask this question also asked\n\nQuestion Text    Write a short Python funct",
+   "text_sha256": [
+    "b2e6e24abae2992e",
+    "5c0abad25a6a9136",
+    "a3337a54c9a1fffc",
+    "efed57b53933e2ba",
+    "df75016f6618da25"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 39.89,
+   "decode_tps_min": 35.87,
+   "decode_tps_max": 41.67,
+   "decode_tps_all": [
+    41.67,
+    36.0,
+    35.87,
+    41.27,
+    39.89
+   ],
+   "ttft_s_median": 0.27,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU\n\n## The Plain-English Explanation\n\nImagine you have to grade thousands of exams, and each exam has the same set of questions. You could grade them all yourself, one at",
+   "text_sha256": [
+    "28e4baa6eaaf5c60",
+    "48a85a0cc2227f11",
+    "720dec4154379d44",
+    "8ed1a5c3c2d8d75e",
+    "c0a7fae6ae911759"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 59.44,
+   "decode_tps_min": 58.43,
+   "decode_tps_max": 59.96,
+   "decode_tps_all": [
+    59.96,
+    59.44,
+    59.33,
+    59.71,
+    58.43
+   ],
+   "ttft_s_median": 0.144,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 25",
+   "text_sha256": [
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 44.86,
+   "decode_tps_min": 44.12,
+   "decode_tps_max": 45.05,
+   "decode_tps_all": [
+    44.12,
+    44.74,
+    44.86,
+    44.87,
+    45.05
+   ],
+   "ttft_s_median": 0.22,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU, in Plain English\n\n## The Big Idea\n\nA CPU is like a few brilliant chefs who cook one dish at a time, very fast. A GPU is like a thousand line cooks who each handle one",
+   "text_sha256": [
+    "c13cb28938fbfb2d",
+    "c13cb28938fbfb2d",
+    "c13cb28938fbfb2d",
+    "c13cb28938fbfb2d",
+    "c13cb28938fbfb2d"
+   ]
+  }
+ ]
+}

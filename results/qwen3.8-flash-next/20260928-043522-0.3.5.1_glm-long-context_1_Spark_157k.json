@@ -1,0 +1,232 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-flash-next",
+ "label": "0.3.5.1 + glm-long-context, 1 Spark, 157k",
+ "model": "Qwen3.8-Flash-Next",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T04:35:22+00:00",
+ "finished_utc": "2026-09-28T04:38:50+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "1",
+  "checkpoint": "Vontra/Qwen3.8-Flash-Next-MLX-4bit-MTP",
+  "platform": "1x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-7a01d26757",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 75.23,
+   "decode_tps_min": 70.75,
+   "decode_tps_max": 89.49,
+   "decode_tps_all": [
+    70.75,
+    76.64,
+    71.12,
+    75.23,
+    89.49
+   ],
+   "ttft_s_median": 0.101,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\n\n</think>\n\n# Fibonacci Sequence in Python\n\n## Implementation\n\n```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"\n    Compute the first `n` numbers of the Fibonacci sequence.\n    \n    Args",
+   "text_sha256": [
+    "36379247ea155993",
+    "96053e2ebad06c0f",
+    "bd1ece64b89992ac",
+    "53fc9dafd0470c6e",
+    "b39c42f9470162cd"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 60.61,
+   "decode_tps_min": 58.9,
+   "decode_tps_max": 63.84,
+   "decode_tps_all": [
+    62.09,
+    63.84,
+    60.61,
+    58.9,
+    59.77
+   ],
+   "ttft_s_median": 0.137,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### Part 1: How Matrix Multiplication Uses a GPU (Plain English)\n\nImagine you have a huge table of numbers (Matrix A) and another huge table of numbers (Matrix B), and you want to combine them into a ",
+   "text_sha256": [
+    "0ac2e3a69df83e86",
+    "8bc69fb4b3399dc4",
+    "ddfd30f1b81cf3ef",
+    "0bef50ccc773ed4f",
+    "e5a39875171b7dc9"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 74.56,
+   "decode_tps_min": 74.51,
+   "decode_tps_max": 74.66,
+   "decode_tps_all": [
+    74.61,
+    74.54,
+    74.51,
+    74.66,
+    74.56
+   ],
+   "ttft_s_median": 0.102,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\n\n</think>\n\nHere is a concise and efficient Python function to compute the Fibonacci sequence, followed by a detailed explanation.\n\n### Python Function\n\n```python\ndef fibonacci(n: int) -> lis",
+   "text_sha256": [
+    "f4de8be796db3e37",
+    "f4de8be796db3e37",
+    "f4de8be796db3e37",
+    "f4de8be796db3e37",
+    "f4de8be796db3e37"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 72.79,
+   "decode_tps_min": 72.69,
+   "decode_tps_max": 72.89,
+   "decode_tps_all": [
+    72.69,
+    72.89,
+    72.86,
+    72.79,
+    72.7
+   ],
+   "ttft_s_median": 0.135,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "Here is an explanation of how matrix multiplication works on a GPU, followed by a small numerical example.\n\n### Part 1: How Matrix Multiplication Uses a GPU (Plain English)\n\nTo understand why GPUs are",
+   "text_sha256": [
+    "dffbbdd5c05d857d",
+    "dffbbdd5c05d857d",
+    "dffbbdd5c05d857d",
+    "dffbbdd5c05d857d",
+    "dffbbdd5c05d857d"
+   ]
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 2.08,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 79.29455927507875,
+     "serial_tps": 38.140871631802305
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 77.27372392924426,
+     "serial_tps": 39.42447950563642
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 82.01081251608787,
+     "serial_tps": 39.47350386725626
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 72.25047858546226,
+     "serial_tps": 39.725576254494996
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 53.47816974765923,
+     "serial_tps": 39.456063871027446
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 66.76948318942452,
+     "serial_tps": 39.41979001968857
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 95.11292595661175,
+     "serial_tps": 39.4067792231205
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 101.14447528270838,
+     "serial_tps": 39.424392548373035
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 99.78541326656104,
+     "serial_tps": 39.40933828088033
+    }
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 33141,
+   "ttft_s": 17.43,
+   "prefill_tps": 1901.2,
+   "decode_tps_median": 38.92,
+   "needle_found": true,
+   "followup_ttft_s": 0.36,
+   "followup_prompt_tokens": 33423,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 64.19,
+   "sample": "DEPLOY_CODE = \"ORCA-7409\"\n\n### Repository Architecture Explanation\n\nThe repository consists of a collection of independent, modular Python files, each defining a specific `@dataclass` that acts as a u"
+  },
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 131249,
+   "ttft_s": 79.25,
+   "prefill_tps": 1656.2,
+   "decode_tps_median": 40.05,
+   "needle_found": true,
+   "followup_ttft_s": 0.89,
+   "followup_prompt_tokens": 131531,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 54.46,
+   "sample": "DEPLOY_CODE = \"ORCA-8359\"\n\n### Repository Architecture Explanation\n\nThe repository consists of a large collection of independent, self-contained Python modules (files) that define utility classes for "
+  }
+ ]
+}

@@ -1,0 +1,155 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "vLLM Mia EXL3 850k",
+ "model": "GLM-5.3-Flash-EXL3",
+ "url": "http://<server>:8888",
+ "started_utc": "2026-09-27T07:54:02+00:00",
+ "finished_utc": "2026-09-27T07:57:57+00:00",
+ "client": {
+  "python": "3.11.7"
+ },
+ "recipes_git": null,
+ "meta": {
+  "platform": "2x DGX Spark",
+  "engine": "vLLM (Mia-AiLab EXL3 recipe)"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 35.15,
+   "decode_tps_min": 27.52,
+   "decode_tps_max": 45.9,
+   "decode_tps_all": [
+    31.84,
+    27.52,
+    35.15,
+    41.33,
+    45.9
+   ],
+   "ttft_s_median": 0.186,
+   "tokens": 64,
+   "slow_runs_flagged": true,
+   "attempts": 1,
+   "sample": " Your function should compute and print the Fibonacci sequence for the first 10 numbers starting at 1, 1 (i.e., 1, 1, 2, 3, 5, 8, 13, 21, 34, 55).\n\nFilo tutor solution\n\nStudents who ask",
+   "text_sha256": [
+    "d2525166d2f666bf",
+    "810ddb43dbddcfc4",
+    "e617259fe6fdfcd0",
+    "219027f6e4fb27f1",
+    "931714133004fe3e"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 26.93,
+   "decode_tps_min": 23.83,
+   "decode_tps_max": 34.7,
+   "decode_tps_all": [
+    26.93,
+    34.7,
+    31.09,
+    23.83,
+    26.04
+   ],
+   "ttft_s_median": 0.315,
+   "tokens": 64,
+   "slow_runs_flagged": true,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU\n\n## The Big Picture\n\nImagine you need to multiply two grids of numbers together. A CPU is like one very smart worker who does tasks quickly but one at a time (or a few",
+   "text_sha256": [
+    "7ca554d90e09e71c",
+    "b8c3dd1bbea74baf",
+    "2187c30fd0fffabf",
+    "047fc6aba394df59",
+    "9a1183aca4dce283"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 48.24,
+   "decode_tps_min": 41.78,
+   "decode_tps_max": 67.84,
+   "decode_tps_all": [
+    48.24,
+    67.84,
+    50.08,
+    41.78,
+    46.21
+   ],
+   "ttft_s_median": 0.26,
+   "tokens": 64,
+   "slow_runs_flagged": true,
+   "attempts": 2,
+   "sample": " Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ... Each number is the sum of the two preceding ones. The sequence starts with 0 and 1. The Fibonacci sequence is defined by the recurrence relati",
+   "text_sha256": [
+    "8e413dc448f81940",
+    "eec98d1894db4e95",
+    "8e413dc448f81940",
+    "df2726c4375c33bc",
+    "a44558271378113d"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 29.67,
+   "decode_tps_min": 28.36,
+   "decode_tps_max": 30.69,
+   "decode_tps_all": [
+    29.67,
+    28.36,
+    30.69,
+    28.62,
+    30.28
+   ],
+   "ttft_s_median": 0.24,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU\n\n## The Plain-English Explanation\n\nImagine you're a teacher grading 100 worksheets, and each worksheet takes 5 minutes to grade.\n\n**A CPU** is like one really fast tea",
+   "text_sha256": [
+    "11c40bb28231a39e",
+    "e6b042e7ae05ea53",
+    "3175a2fe9a0591f2",
+    "5006b77f99346cbe",
+    "6f1adffd10b5d1da"
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32763,
+   "ttft_s": 24.27,
+   "prefill_tps": 1349.8,
+   "decode_tps_median": 28.82,
+   "needle_found": true,
+   "followup_ttft_s": 0.93,
+   "followup_prompt_tokens": 33035,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 29.29,
+   "sample": "ORCA-7409\n\nThe repository is a collection of 76 small, self-contained Python modules (numbered 0\u201375) that all follow the same generated pattern: each module pairs a \"domain entity\" (validator, journal"
+  },
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 130832,
+   "ttft_s": 105.23,
+   "prefill_tps": 1243.3,
+   "decode_tps_median": 34.92,
+   "needle_found": true,
+   "followup_ttft_s": 2.34,
+   "followup_prompt_tokens": 131104,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 33.43,
+   "sample": "The value of DEPLOY_CODE is ORCA-8359.\n\nNow, here is the module-by-module architecture of the repository:\n\n## Overall Pattern\n\nThe repository is a collection of ~300 small, self-contained Python modul"
+  }
+ ]
+}

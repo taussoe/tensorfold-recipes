@@ -1,0 +1,258 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "0.3.6.1 + glm-long-context",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T10:59:38+00:00",
+ "finished_utc": "2026-09-28T11:01:16+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-ff83453d0a",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 47.43,
+   "decode_tps_min": 35.84,
+   "decode_tps_max": 55.95,
+   "decode_tps_all": [
+    45.8,
+    51.96,
+    35.84,
+    55.95,
+    47.43
+   ],
+   "ttft_s_median": 0.122,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Also, write a function that returns the sum of all the even Fibonacci numbers less than n.\n\nShort Answer: The Fibonacci sequence is a series of numbers where each number is the sum of the two precedi",
+   "text_sha256": [
+    "8ab176348fc3f889",
+    "62a7e37b4192b535",
+    "287cc5b22767b331",
+    "efed57b53933e2ba",
+    "5bcb965ff1735f23"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 41.14,
+   "decode_tps_min": 33.04,
+   "decode_tps_max": 41.78,
+   "decode_tps_all": [
+    33.04,
+    41.55,
+    41.14,
+    39.01,
+    41.78
+   ],
+   "ttft_s_median": 0.209,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU, in Plain English\n\n**The big idea:** A GPU is like a huge team of workers who all do simple math at the same time, while a CPU is like a few very fast workers doing on",
+   "text_sha256": [
+    "b0effa525bad26fd",
+    "b4e15df851fbf39e",
+    "636dddf4b0fbcd15",
+    "a4052636e0d205d3",
+    "a3ab846e575b0f69"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 61.08,
+   "decode_tps_min": 60.58,
+   "decode_tps_max": 62.21,
+   "decode_tps_all": [
+    61.59,
+    62.21,
+    60.6,
+    60.58,
+    61.08
+   ],
+   "ttft_s_median": 0.118,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": " Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 25",
+   "text_sha256": [
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95",
+    "eec98d1894db4e95"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 46.86,
+   "decode_tps_min": 46.4,
+   "decode_tps_max": 47.4,
+   "decode_tps_all": [
+    46.74,
+    46.86,
+    46.4,
+    46.96,
+    47.4
+   ],
+   "ttft_s_median": 0.187,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Matrix Multiplication on a GPU, in Plain English\n\n## The Big Idea\n\nA CPU is like a few brilliant chefs who cook one dish at a time, very fast. A GPU is like a thousand line cooks who each handle one",
+   "text_sha256": [
+    "9f4a1ad9e6943fd0",
+    "9f4a1ad9e6943fd0",
+    "9f4a1ad9e6943fd0",
+    "9f4a1ad9e6943fd0",
+    "9f4a1ad9e6943fd0"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 54.46,
+   "decode_tps_min": 48.42,
+   "decode_tps_max": 56.37,
+   "decode_tps_all": [
+    56.37,
+    48.42,
+    55.09,
+    54.46,
+    50.16
+   ],
+   "ttft_s_median": 0.169,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Fibonacci Sequence in Python\n\nHere's a simple function that generates the first `n` Fibonacci numbers:\n\n```python\ndef fibonacci(n):\n    \"\"\"Return a list of the first n Fibonacci numbers.\"\"\"\n    sequ",
+   "text_sha256": [
+    "dadcac7771a55c12",
+    "385e1504559b0df4",
+    "74d94b764d86df55",
+    "dadcac7771a55c12",
+    "80842a3d4ecc5df4"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 57.29,
+   "decode_tps_min": 56.77,
+   "decode_tps_max": 57.91,
+   "decode_tps_all": [
+    57.48,
+    57.29,
+    57.91,
+    56.77,
+    56.95
+   ],
+   "ttft_s_median": 0.167,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Fibonacci Sequence in Python\n\nHere's a simple function that generates the first `n` Fibonacci numbers:\n\n```python\ndef fibonacci(n):\n    \"\"\"Return a list of the first n Fibonacci numbers.\"\"\"\n    sequ",
+   "text_sha256": [
+    "dadcac7771a55c12",
+    "dadcac7771a55c12",
+    "dadcac7771a55c12",
+    "dadcac7771a55c12",
+    "dadcac7771a55c12"
+   ]
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.64,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 59.53218046976521,
+     "serial_tps": 33.803491255982536
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 46.3677846406462,
+     "serial_tps": 32.79445843998629
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 55.244917615336995,
+     "serial_tps": 33.772030673250825
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 42.27713256947341,
+     "serial_tps": 33.02951472616215
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 43.68066959560366,
+     "serial_tps": 33.325852392916914
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 43.68752250230698,
+     "serial_tps": 33.281301195956516
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 57.44558771912484,
+     "serial_tps": 33.053758899025794
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 57.007457692763595,
+     "serial_tps": 33.64169197280131
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 56.08332605518835,
+     "serial_tps": 33.57827468747713
+    }
+   ]
+  }
+ ]
+}

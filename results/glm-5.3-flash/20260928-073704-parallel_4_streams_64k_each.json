@@ -1,0 +1,191 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "parallel 4 streams, 64k each",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T07:37:04+00:00",
+ "finished_utc": "2026-09-28T07:40:27+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-2449e14138",
+  "tensorfold_commit": "2f8e514"
+ },
+ "cells": [
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.34,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 44.00833375635647,
+     "serial_tps": 33.749274010904486
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 40.9714993911631,
+     "serial_tps": 32.13978333617139
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 56.822943830777575,
+     "serial_tps": 33.95376420046719
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 40.39598043318039,
+     "serial_tps": 34.19801968963019
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 45.14266139420139,
+     "serial_tps": 34.40634396580507
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 45.40113453896684,
+     "serial_tps": 33.983567533799224
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 54.9541454865873,
+     "serial_tps": 33.65644300422706
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 59.35042065573687,
+     "serial_tps": 30.885143458028057
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 56.76359587905763,
+     "serial_tps": 33.91246062354392
+    }
+   ]
+  },
+  {
+   "suite": "concurrency",
+   "cell": "streams-1",
+   "streams": 1,
+   "failed": 0,
+   "decode_tps_median": 45.91,
+   "aggregate_tps": 44.05,
+   "ttft_s_median": 0.242
+  },
+  {
+   "suite": "concurrency",
+   "cell": "streams-2",
+   "streams": 2,
+   "failed": 0,
+   "decode_tps_median": 40.04,
+   "aggregate_tps": 76.18,
+   "ttft_s_median": 0.347
+  },
+  {
+   "suite": "concurrency",
+   "cell": "streams-4",
+   "streams": 4,
+   "failed": 0,
+   "decode_tps_median": 32.77,
+   "aggregate_tps": 122.41,
+   "ttft_s_median": 0.577
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 56.18,
+   "decode_tps_min": 50.78,
+   "decode_tps_max": 60.62,
+   "decode_tps_all": [
+    60.62,
+    50.78,
+    56.18,
+    58.0,
+    53.89
+   ],
+   "ttft_s_median": 0.171,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Fibonacci Sequence in Python\n\nHere's a simple function that generates the first `n` Fibonacci numbers:\n\n```python\ndef fibonacci(n):\n    \"\"\"Return a list of the first n Fibonacci numbers.\"\"\"\n    sequ",
+   "text_sha256": [
+    "dadcac7771a55c12",
+    "385e1504559b0df4",
+    "74d94b764d86df55",
+    "dadcac7771a55c12",
+    "80842a3d4ecc5df4"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 59.47,
+   "decode_tps_min": 59.29,
+   "decode_tps_max": 59.63,
+   "decode_tps_all": [
+    59.34,
+    59.61,
+    59.47,
+    59.63,
+    59.29
+   ],
+   "ttft_s_median": 0.174,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Fibonacci Sequence in Python\n\nHere's a simple function that generates the first `n` Fibonacci numbers:\n\n```python\ndef fibonacci(n):\n    \"\"\"Return a list of the first n Fibonacci numbers.\"\"\"\n    sequ",
+   "text_sha256": [
+    "dadcac7771a55c12",
+    "dadcac7771a55c12",
+    "dadcac7771a55c12",
+    "dadcac7771a55c12",
+    "dadcac7771a55c12"
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 32770,
+   "ttft_s": 27.67,
+   "prefill_tps": 1184.2,
+   "decode_tps_median": 44.62,
+   "needle_found": true,
+   "followup_ttft_s": 0.52,
+   "followup_prompt_tokens": 33042,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 51.05,
+   "sample": "`DEPLOY_CODE = \"ORCA-7409\"`\n\n## Repository Architecture\n\nThis repository is a collection of ~76 small, structurally identical Python modules, each following the same template. Here's the breakdown:\n\n#"
+  }
+ ]
+}
