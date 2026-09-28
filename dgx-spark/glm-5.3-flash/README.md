@@ -10,7 +10,7 @@ decoding, drafts only change the speed.
 | Draft model (opt-in) | [`incoai/GLM-5.3-Flash-DFlash2`](https://huggingface.co/incoai/GLM-5.3-Flash-DFlash2), **CC BY-NC-ND 4.0, non-commercial** |
 | Machines | 2 Sparks (one has 128 GB; the model needs 182). Each rank holds 90.8 GB |
 | API | `http://<spark1>:8080/v1`, model id `GLM-5.3-Flash` |
-| Context | 262,144 tokens (`CONTEXT`); `CONTEXT=0` allocates what fits, 487,495 on our Sparks (with our `engine/` branch's latent cache) |
+| Context | 458,752 tokens (`CONTEXT`), tested with a 449k prompt; `CONTEXT=0` allocates what fits, 465,768 on our Sparks (our `engine/` branch's latent cache, image input on) |
 | First start | up to ~13 minutes (kernel compile + load); later starts about 4–5 minutes |
 | Images | yes, with our `engine/` branch: `image_url` parts in user and tool messages (see [Images](#images)) |
 
@@ -106,6 +106,7 @@ work for GLM on top:
 | **TensorFold engine/, 130,839 tokens** | 1,231 tok/s | 106 s | **44.2 tok/s** | yes | **0.7 s** |
 | vLLM, 130,832 tokens | **1,243 tok/s** | **105 s** | 34.9 tok/s | yes | 2.3 s |
 | **TensorFold engine/, 257,711 tokens** | 1,139 tok/s | 226 s | 42.8 tok/s | yes | 0.9 s |
+| **TensorFold engine/, 449,088 tokens** (images on, `CONTEXT=0`) | 975 tok/s | 461 s | 38.1 tok/s | yes | 1.2 s |
 | TensorFold 0.3.5.1 as released, 32,770 tokens | 626 tok/s | 52 s | – | no ("!!!!", fixed in 0.3.6: #53) | – |
 
 Exactness: 9/9 drafted replies byte-identical to serial ones. The 256k run left at least 14 GB free on each Spark.
@@ -174,8 +175,9 @@ Measured on the two Sparks, 28 September 2026, thinking off, one image and a one
 | 2880×1800 screenshot | 6,695 | 6,722 | 16.3 s | same |
 | 3900×2600 drawing | 7,957 (the cap) | 7,972 | 19.9 s, of which the tower 13 s | right |
 
-Images take ~2.5 GB on rank 0 (tower and scratch), counted in the startup estimate: 262,144 still fits
-(102.49 of 102.99 GiB).
+Images take ~2.3 GB on rank 0 (tower and scratch), counted in the startup estimate; the 458,752-token context
+fits beside them. We tried attention in split fp16 pieces on tensor cores to speed the tower up: 1.5x faster on the
+largest image, but 1.5% off the exact rows, so the tower stays exact.
 
 ## What this recipe does for speed
 
@@ -204,7 +206,7 @@ Images take ~2.5 GB on rank 0 (tower and scratch), counted in the startup estima
 | Variable | Default | Notes |
 | --- | --- | --- |
 | `ACCEPT_NONCOMMERCIAL_DRAFTER` | `0` | `1` pulls and uses DFlash2 (non-commercial license) |
-| `CONTEXT` | `262144` | prompt + reply tokens, tested with a 256k prompt; `0` allocates what fits (487,495 on our Sparks, not tested that far) |
+| `CONTEXT` | `458752` | prompt + reply tokens, tested with a 449k prompt (lowest free memory 12 GB); `0` allocates what fits (465,768 on our Sparks) |
 | `RANK_SPLIT` | `1` | `0` serves the full checkpoint on both ranks (needs 182 GB of disk on each) |
 | `PARALLEL` | empty | `4`: up to 4 requests decoded together, `CONTEXT` each (default 65,536 then) |
 | `SERVE_ARGS` | `--drafter none` without the opt-in | more `tensorfold serve` flags, e.g. `--mtp-drafts 3`, `--thinking-budget 2048` |

@@ -1,0 +1,110 @@
+{
+ "schema": 1,
+ "recipe": "glm-5.3-flash",
+ "label": "",
+ "model": "GLM-5.3-Flash",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-28T15:59:34+00:00",
+ "finished_utc": "2026-09-28T16:08:23+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/GLM-5.3-Flash-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-2fa435dcb8",
+  "tensorfold_commit": "34bae79"
+ },
+ "cells": [
+  {
+   "suite": "context",
+   "cell": "context-450000",
+   "prompt_tokens": 449088,
+   "ttft_s": 460.6,
+   "prefill_tps": 975.0,
+   "decode_tps_median": 38.12,
+   "needle_found": true,
+   "followup_ttft_s": 1.21,
+   "followup_prompt_tokens": 449360,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 42.72,
+   "sample": "DEPLOY_CODE = `KITE-4645`\n\n## Repository Architecture\n\nThis repository is a large, highly repetitive codebase of ~1008 small Python modules, each following an identical template. Here's the breakdown:"
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 1.61,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 59.55672453800253,
+     "serial_tps": 32.172359513005375
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 44.10855446927276,
+     "serial_tps": 32.199930629555865
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 53.39372893212619,
+     "serial_tps": 33.234871912002646
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 41.25360495979185,
+     "serial_tps": 32.744417008487716
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 43.21870501085669,
+     "serial_tps": 33.46691487954974
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 43.73723260683429,
+     "serial_tps": 33.410064259018384
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 57.09365261590848,
+     "serial_tps": 33.48184232641237
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 57.55757907710838,
+     "serial_tps": 33.77567176197277
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 56.8939282216578,
+     "serial_tps": 33.98941559064999
+    }
+   ]
+  }
+ ]
+}

@@ -13,7 +13,7 @@ numbers compare across all of them.
 
 | Model | Where | Context | Decode, one stream | Reading a 32k prompt | Measured on |
 | --- | --- | ---: | ---: | ---: | --- |
-| [GLM-5.3-Flash](dgx-spark/glm-5.3-flash/) | 2× Spark | 262k (487k fits) | 44–63 tok/s (vLLM: 27–48) | 1,292 tok/s (vLLM: 1,350) | our Sparks, same benchmark |
+| [GLM-5.3-Flash](dgx-spark/glm-5.3-flash/) | 2× Spark | 448k, with images | 44–63 tok/s (vLLM: 27–48) | 1,292 tok/s (vLLM: 1,350) | our Sparks, same benchmark |
 | [Qwen3.8 Flash Next](dgx-spark/qwen3.8-flash-next/) | 1 or 2× Spark | 157k on 1, 262k on 2 | 60–75 on 1, 86–103 on 2 | 1,890 on 1, 2,599 on 2 (vLLM, 1 Spark: 2,314) | our Sparks |
 | [Qwen3.8-27B](dgx-spark/qwen3.8-27b/) | 1 or 2× Spark | 262k | 71–82 tok/s on 2, code as chat 142–164 | 1,945 tok/s on 2 | our Sparks |
 | [Qwen3.8 Flash Next](mac/qwen3.8-flash-next/) | Mac, 128 GB (n-gram tables on the SSD) | 64k | 64–76 tok/s on an M3 Max | 546 tok/s | this Mac |
@@ -34,10 +34,10 @@ What it adds to 0.3.6.1, every change tested so drafted replies stay byte-identi
 
 | Change | Effect |
 | --- | --- |
-| GLM's attention cache as its 512-wide latent (~20 KB a token per Spark instead of ~0.4 MB) | 262k tested and 487k fits on two Sparks, where the per-head cache holds ~40k; offered to TensorFold in [#54](https://github.com/ashhart/TensorFold/pull/54) |
+| GLM's attention cache as its 512-wide latent (~20 KB a token per Spark instead of ~0.4 MB) | 449k tested (448k the default, beside image input) on two Sparks, where the per-head cache holds ~40k; offered to TensorFold in [#54](https://github.com/ashhart/TensorFold/pull/54) |
 | DSA token selection for all rows of a chunk over the pools it can see, top 512 by one radix-select kernel; CUDA graphs past 2,051 tokens | selection at 128k: 45 → 6 ms a layer and chunk |
 | Latent attention tiles of all 32 heads in prompt chunks; KDA chains of prompt chunks in three kernels | sparse attention 28 → 20 ms, a KDA chain 6.9 → 4.0 ms (2,048 rows) |
-| Memory admission that sizes the latent cache | `CONTEXT=0` finds 487,495 tokens |
+| Memory admission that sizes the latent cache (and the prompt scratch as allocated) | `CONTEXT=0` finds 465,768 tokens with image input |
 | Prompt cache for several conversations (rows saved when another conversation takes the caches, 3 GiB budget) | switching back to a long conversation resumes instead of prefilling again |
 | Concurrent GLM streams (`PARALLEL=4`): every stream's drafts verified in one forward, each equal to its serial decoding | 122 tok/s together at 4 streams, 33 each (vLLM: 62 together, 17 each) |
 | Image input for GLM (`image_url` parts): the checkpoint's processor, its vision tower on rank 0 with fp32 products, image-aware prompt cache | screenshots read right; a 1920×1080 screenshot prefills in 5.1 s ([details](dgx-spark/glm-5.3-flash/README.md#images)) |
