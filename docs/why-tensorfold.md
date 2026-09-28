@@ -39,6 +39,6 @@ for GLM-5.3-Flash, offered back to TensorFold in [#54](https://github.com/ashhar
 ## Things to know
 
 - TensorFold serves the models it has a family for; others are refused before anything downloads.
-- The CUDA server does not take images yet (on TensorFold's roadmap); the Mac server's features are listed in
-  TensorFold's `docs/api.md`.
+- The released CUDA server does not take images yet (0.3.6's release notes name image input as next); our
+  `engine/` branch adds them for GLM-5.3-Flash. The Mac server's features are listed in TensorFold's `docs/api.md`.
 - It is young (0.3.x) and changes quickly: pin a commit, as these recipes do.

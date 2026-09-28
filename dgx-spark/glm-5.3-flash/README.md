@@ -12,6 +12,7 @@ decoding, drafts only change the speed.
 | API | `http://<spark1>:8080/v1`, model id `GLM-5.3-Flash` |
 | Context | 262,144 tokens (`CONTEXT`); `CONTEXT=0` allocates what fits, 487,495 on our Sparks (with our `engine/` branch's latent cache) |
 | First start | up to ~13 minutes (kernel compile + load); later starts about 4–5 minutes |
+| Images | yes, with our `engine/` branch: `image_url` parts in user and tool messages (see [Images](#images)) |
 
 ## Run it
 
@@ -146,6 +147,36 @@ conversations hold (their ~70 MB of KDA state each and their saved rows) stays w
 
 Prompt reading is now within 1% of vLLM at 128k and 4% at 32k, and with `PARALLEL` TensorFold serves several requests at once too (above). Code written as a chat reply (`--suites codechat`): 55.0 sampled, 57.9 greedy.
 
+## Images
+
+Our `engine/` branch reads images: OpenAI `image_url` parts (data: or http URLs) in user and tool messages, as
+Glyph and most agent harnesses send screenshots. TensorFold 0.3.6.1 as released answers them with HTTP 400.
+
+- **Same preprocessing as the checkpoint's processor.** The image is fitted on a canvas rounded up to 28 pixels
+  (zero padding right and bottom), 16 to 8,000 image tokens, one token per 28×28 pixels. Checked equal to
+  vLLM's `Glm5NextImageProcessor` (largest difference 5e-7).
+- **The vision tower runs on rank 0**, its 1 GB of bf16 weights in rank 0's folder (`./pull.sh` adds
+  `vision.safetensors` to an existing split). Its products are fp32: the tower amplifies rounding, and run all in
+  bf16 (as vLLM runs it) its output for a photo is 7% off the exact one. Ours matches a float64 reference to the
+  final bf16 rounding.
+- **The prompt cache knows the images.** An image's tokens carry its hash, so a follow-up turn resumes the
+  conversation (its images are not encoded again) and a different image never matches a cached one.
+- **One stream.** Images need `PARALLEL` empty. `ENGINE_ENV="TF_GLM_VISION=0 ..."` turns the tower off.
+
+Measured on the two Sparks, 28 September 2026, thinking off, one image and a one-line question:
+
+| Image | Image tokens | Prompt tokens | Prefill (tower included) | Answer |
+| --- | ---: | ---: | ---: | --- |
+| 1000×700 test drawing | 900 | 927 | 1.4–2.2 s | shapes, colors, positions and the caption right |
+| same, follow-up turn | (cached) | 1,073 | 0.5 s (927 resumed) | which shape is bigger and the number in the caption |
+| 1280×800 screenshot | 1,334 | 1,361 | 2.2 s | top-bar title and button label, small default font |
+| 1920×1080 screenshot | 2,691 | 2,718 | 5.1 s | same |
+| 2880×1800 screenshot | 6,695 | 6,722 | 16.3 s | same |
+| 3900×2600 drawing | 7,957 (the cap) | 7,972 | 19.9 s, of which the tower 13 s | right |
+
+Images take ~2.5 GB on rank 0 (tower and scratch), counted in the startup estimate: 262,144 still fits
+(102.49 of 102.99 GiB).
+
 ## What this recipe does for speed
 
 - **Per-rank halves** (`RANK_SPLIT=1`). `pull.sh` runs TensorFold's splitter once; each rank then loads 91 GB
@@ -184,6 +215,7 @@ Prompt reading is now within 1% of vLLM at 128k and 4% at 32k, and with `PARALLE
 - A client that disconnects does not stop its reply early: both ranks finish it.
 - On GB10, bursts of page migration can slow a run to half speed. `bench.sh` re-measures greedy cells whose runs
   disagree and marks the ones that still do.
-- TensorFold's server does not support `stop`, `n > 1`, `logprobs` or images (see its `docs/api.md`).
+- TensorFold's server does not support `stop`, `n > 1` or `logprobs` (see its `docs/api.md`); images only
+  with our `engine/` branch and without `PARALLEL`. Video and audio are not supported.
 
 Source: [TensorFold's GLM recipe](https://github.com/ashhart/TensorFold/blob/main/docs/recipes/glm-5.3-flash.md).

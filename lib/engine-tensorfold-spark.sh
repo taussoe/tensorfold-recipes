@@ -142,7 +142,9 @@ split_ranks() {
   local r node
   for r in 0 1; do
     node=1; [ "$WEIGHTS_SYNC" = pull ] && [ "$r" = 1 ] && node=2
-    if run_on "$node" test -f "$HF_CACHE/tensorfold-splits/$RECIPE_NAME/rank$r/.complete"; then
+    # rank 0 also keeps the vision tower (vision.safetensors, 1 GB): an older split gets it added
+    if run_on "$node" test -f "$HF_CACHE/tensorfold-splits/$RECIPE_NAME/rank$r/.complete" && { [ "$r" = 1 ] ||
+        run_on "$node" test -f "$HF_CACHE/tensorfold-splits/$RECIPE_NAME/rank$r/vision.safetensors"; }; then
       ok "rank $r half already on Spark $node"; continue
     fi
     log "writing rank $r's half on Spark $node (about 91 GB, a few minutes)"

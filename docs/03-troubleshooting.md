@@ -33,7 +33,8 @@ shows rank 1 on Spark 2.
 | Symptom | Cause and fix |
 | --- | --- |
 | Long `reasoning_content` before every answer (Qwen, GLM) | thinking is on by default. `"chat_template_kwargs": {"enable_thinking": false}` per request, `--no-thinking` or `--thinking-budget N` for the server |
-| `stop`, `n`, `logprobs`, images ignored or rejected | TensorFold's server does not support them yet (its `docs/api.md`) |
+| `stop`, `n`, `logprobs`, images ignored or rejected | TensorFold's server does not support them yet (its `docs/api.md`); images work for GLM with our `engine/` branch |
+| GLM answers images with "reads text only" | rank 0's folder has no `vision.safetensors` (run `./pull.sh` once more), `PARALLEL` is set, or `TF_GLM_VISION=0` |
 | A second request waits | TensorFold decodes one request at a time; a request with `"priority": "background"` yields to others |
 
 ## Recovering

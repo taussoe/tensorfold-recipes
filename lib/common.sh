@@ -77,6 +77,12 @@ wait_http() {
         run_on "$n" docker logs --tail 40 "$c" 2>&1 | sed 's/^/    /' >&2 || true
         return 1
       fi
+      # a refused start can hang in NCCL teardown for half an hour: its error line is enough
+      if run_on "$n" docker logs --tail 20 "$c" 2>&1 | grep -qE '^(tensorfold: |Traceback)'; then
+        warn "container $c on Spark $n failed. Last log lines:"
+        run_on "$n" docker logs --tail 40 "$c" 2>&1 | sed 's/^/    /' >&2 || true
+        return 1
+      fi
     done
     if [ $((now - start)) -ge "$limit" ]; then return 1; fi
     printf '.' >&2; sleep 5
