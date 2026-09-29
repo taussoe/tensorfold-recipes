@@ -49,10 +49,16 @@ drafted replies still equal serial ones (9/9).
 | **0.3.5.1, 2 Sparks** | 262k | **2,450 tok/s** | **13.5 s** | **2,031 tok/s** | **65 s** | **100 / 91 / 91 / 88** | 59.0 / 51.9 |
 | **0.3.6.1, 1 Spark** | 157k | **1,890 tok/s** | **17.5 s** | **1,800 tok/s** | **73 s** | 75 / 60 / 75 / 72 | 30.5 / 40.0 |
 | **0.3.6.1, 2 Sparks** | 262k | **2,599 tok/s** | **12.8 s** | **2,258 tok/s** | **58 s** | **103 / 90 / 91 / 86** | 57.7 / 51.5 |
+| **0.3.6.2, 1 Spark** | 157k | 1,772 tok/s | 18.7 s | 1,660 tok/s | 79 s | 71 / 59 / 74 / 73 | 39.3 / 40.0 |
+| **0.3.6.2, 2 Sparks** | 262k | 2,466 tok/s | 13.4 s | 2,041 tok/s | 64 s | **104 / 91 / 92 / 89** | 58.9 / 52.3 |
 | vLLM + MTP (published, 1 Spark) | | 2,314 tok/s | | | | 42 / 33 / 41 / 38 | |
 
-Every run found the hidden fact at 32k and 128k. Code written as a chat reply (`--suites codechat`, 0.3.6.1):
-80.0 / 81.2 tok/s on one Spark and 114.4 / 110.0 on two (sampled / greedy).
+Every run found the hidden fact at 32k and 128k. Code written as a chat reply (`--suites codechat`): 0.3.6.1
+80.0 / 81.2 tok/s on one Spark and 114.4 / 110.0 on two, 0.3.6.2 79.8 / 81.0 and 114.8 / 112.3 (sampled / greedy).
+
+Prompt reading moves with the machine's state from day to day, not only with the release: side by side on one
+Spark on 29 September, 0.3.6.1 read a 36,870-token prompt at 2,096-2,138 tok/s and 0.3.6.2 at 2,089-2,123, a
+138,467-token one at 1,656-1,665 and 1,652-1,655. Compare releases in one session.
 
 **Several requests at once** (`NODES=1 PARALLEL=8 ./start.sh`; TensorFold 0.3.6 runs concurrent Flash Next streams on
 one GPU). One Spark, 256-token prose replies, each stream with a 32k context, drafted == serial 9/9:

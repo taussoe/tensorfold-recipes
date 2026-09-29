@@ -25,16 +25,18 @@ measure your own with `./bench.sh`.
 
 ## Our TensorFold branch (`engine/`)
 
-The Spark recipes build TensorFold from `engine/` (`setup.sh` clones it the first time): branch `glm-long-context`, TensorFold 0.3.6.1 with our
-long-context work for GLM-5.3-Flash on top (Flash Next and the 27B run 0.3.6.1's own code). Set
+The Spark recipes build TensorFold from `engine/` (`setup.sh` clones it the first time): branch `glm-long-context`, TensorFold 0.3.6.2 with our
+agent work for GLM-5.3-Flash on top (Flash Next and the 27B run 0.3.6.2's own code). Set
 `TENSORFOLD_SOURCE=pinned` for a released TensorFold, or `ENGINE_DIR=<checkout>` to build another tree. To clone it
 yourself: `git clone -b glm-long-context https://github.com/taussoe/TensorFold.git engine`.
 
-What it adds to 0.3.6.1, every change tested so drafted replies stay byte-identical to serial ones:
+Our GLM long-context work is part of TensorFold itself since 0.3.6.2: Ash merged it from
+[#54](https://github.com/ashhart/TensorFold/pull/54) (the first five rows below), with fixes of his own on top. The
+rest is what the branch adds to 0.3.6.2. Every change is tested so drafted replies stay byte-identical to serial ones:
 
 | Change | Effect |
 | --- | --- |
-| GLM's attention cache as its 512-wide latent (~20 KB a token per Spark instead of ~0.4 MB) | 449k tested (448k the default, beside image input) on two Sparks, where the per-head cache holds ~40k; offered to TensorFold in [#54](https://github.com/ashhart/TensorFold/pull/54) |
+| GLM's attention cache as its 512-wide latent (~20 KB a token per Spark instead of ~0.4 MB) | 449k tested (448k the default, beside image input) on two Sparks, where the per-head cache holds ~40k; in TensorFold since 0.3.6.2 ([#54](https://github.com/ashhart/TensorFold/pull/54)) |
 | DSA token selection for all rows of a chunk over the pools it can see, top 512 by one radix-select kernel; CUDA graphs past 2,051 tokens | selection at 128k: 45 → 6 ms a layer and chunk |
 | Latent attention tiles of all 32 heads in prompt chunks; KDA chains of prompt chunks in three kernels | sparse attention 28 → 20 ms, a KDA chain 6.9 → 4.0 ms (2,048 rows) |
 | Memory admission that sizes the latent cache (and the prompt scratch as allocated) | `CONTEXT=0` finds 465,768 tokens with image input |
@@ -121,8 +123,8 @@ tools/                       doctor.sh (checks), bench-all.sh (benchmark every m
 
 | Component | Version |
 | --- | --- |
-| TensorFold (Mac) | 0.3.4, commit `2f8e514` (`lib/common.sh`) |
-| TensorFold (Sparks) | `engine/`, branch `glm-long-context` on 0.3.6.1 (`TENSORFOLD_SOURCE=local`, the default) |
+| TensorFold (Mac) | 0.3.6.2, commit `71377a5` (`lib/common.sh`) |
+| TensorFold (Sparks) | `engine/`, branch `glm-long-context` on 0.3.6.2 (`TENSORFOLD_SOURCE=local`, the default) |
 | NVIDIA PyTorch container | `nvcr.io/nvidia/pytorch:26.07-py3` |
 
 Pinning is deliberate: both Sparks and every benchmark run the same code. [Updating](docs/02-optimization.md#updating-the-pins).
@@ -134,7 +136,7 @@ Pinning is deliberate: both Sparks and every benchmark run the same code. [Updat
   byte-identical to serial decoding), the CUDA and MLX engines, and the models' kernels. This repo only packages,
   measures and extends it. Our `engine/` branch
   ([taussoe/TensorFold, `glm-long-context`](https://github.com/taussoe/TensorFold/tree/glm-long-context)) is a fork of
-  TensorFold 0.3.6.1; its GLM long-context work is proposed upstream in
+  TensorFold 0.3.6.2; its GLM long-context work was merged into TensorFold 0.3.6.2 from
   [#54](https://github.com/ashhart/TensorFold/pull/54).
 - **[Mia-AiLab](https://github.com/MiaAI-Lab)**'s vLLM recipes for DGX Spark are the baselines the benchmarks compare
   against, measured on the same machines, and the starting point for this repo's layout.

@@ -9,7 +9,7 @@
 - One model at a time per Spark. Stop the running recipe before starting another.
 - Measure with `./bench.sh` and compare with `python3 bench/compare.py`; never claim a speed you did not measure.
 - Versions are pinned (`lib/common.sh`). The Spark image builds TensorFold from `engine/` (our `glm-long-context`
-  branch on 0.3.6.1; `TENSORFOLD_SOURCE=pinned` for upstream 0.3.6.1). Engine changes need their CUDA tests on a Spark
+  branch on 0.3.6.2; `TENSORFOLD_SOURCE=pinned` for upstream 0.3.6.2). Engine changes need their CUDA tests on a Spark
   (`tests/cuda/test_glm_*.py`, `test_flashnext_*.py`) and must keep drafted replies byte-identical to serial ones.
 - `lib/common.sh` and `lib/engine-tensorfold-mac.sh` must stay bash 3.2 compatible (macOS).
 - TensorFold only: no vLLM, Ollama or other engines in this project (other engines may only be benchmarked

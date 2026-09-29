@@ -1,0 +1,286 @@
+{
+ "schema": 1,
+ "recipe": "qwen3.8-flash-next",
+ "label": "",
+ "model": "Qwen3.8-Flash-Next",
+ "url": "http://127.0.0.1:8080",
+ "started_utc": "2026-09-29T05:00:47+00:00",
+ "finished_utc": "2026-09-29T05:03:17+00:00",
+ "client": {
+  "python": "3.12.3"
+ },
+ "recipes_git": null,
+ "meta": {
+  "engine": "tensorfold-spark",
+  "nodes": "2",
+  "checkpoint": "Vontra/Qwen3.8-Flash-Next-MLX-4bit-MTP",
+  "platform": "2x DGX Spark",
+  "tensorfold_source": "local",
+  "tensorfold_image": "tensorfold-spark:local-5092d7cb5a",
+  "tensorfold_commit": "71377a5"
+ },
+ "cells": [
+  {
+   "suite": "standard",
+   "cell": "code-sampled",
+   "greedy": false,
+   "decode_tps_median": 104.27,
+   "decode_tps_min": 89.25,
+   "decode_tps_max": 107.29,
+   "decode_tps_all": [
+    102.57,
+    104.27,
+    89.25,
+    104.76,
+    107.29
+   ],
+   "ttft_s_median": 0.083,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\n\n</think>\n\n# Fibonacci Sequence in Python\n\n## Implementation\n\n```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"\n    Compute the first `n` numbers of the Fibonacci sequence.\n    \n    Args",
+   "text_sha256": [
+    "36379247ea155993",
+    "f8314ee7a5a3f749",
+    "5398db393701631d",
+    "f504abb6a736abe4",
+    "b6ba36ebe545b4f3"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 90.77,
+   "decode_tps_min": 61.29,
+   "decode_tps_max": 100.14,
+   "decode_tps_all": [
+    85.45,
+    90.77,
+    100.14,
+    94.24,
+    61.29
+   ],
+   "ttft_s_median": 0.106,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "### Part 1: How Matrix Multiplication Uses a GPU (Plain English)\n\nImagine you have a huge table of numbers (Matrix A) and another huge table of numbers (Matrix B), and you want to combine them into a ",
+   "text_sha256": [
+    "0ac2e3a69df83e86",
+    "de4304fcfd248c19",
+    "37c1191c23198935",
+    "85cbd8e4b924ff7a",
+    "23d7512d59e591e3"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "code-greedy",
+   "greedy": true,
+   "decode_tps_median": 91.94,
+   "decode_tps_min": 91.37,
+   "decode_tps_max": 92.28,
+   "decode_tps_all": [
+    91.56,
+    92.01,
+    91.37,
+    92.28,
+    91.94
+   ],
+   "ttft_s_median": 0.085,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "\n\n<think>\n\n</think>\n\nHere is a concise and efficient Python function to compute the Fibonacci sequence, followed by a detailed explanation.\n\n### Python Function\n\n```python\ndef fibonacci(n: int) -> lis",
+   "text_sha256": [
+    "f4de8be796db3e37",
+    "f4de8be796db3e37",
+    "f4de8be796db3e37",
+    "f4de8be796db3e37",
+    "f4de8be796db3e37"
+   ]
+  },
+  {
+   "suite": "standard",
+   "cell": "chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 88.57,
+   "decode_tps_min": 87.32,
+   "decode_tps_max": 89.14,
+   "decode_tps_all": [
+    88.68,
+    88.3,
+    87.32,
+    88.57,
+    89.14
+   ],
+   "ttft_s_median": 0.102,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "Here is an explanation of how matrix multiplication works on a GPU, followed by a small numerical example.\n\n### Part 1: How Matrix Multiplication Uses a GPU (Plain English)\n\nTo understand why GPUs are",
+   "text_sha256": [
+    "42b4e4d2f6c02334",
+    "42b4e4d2f6c02334",
+    "42b4e4d2f6c02334",
+    "42b4e4d2f6c02334",
+    "42b4e4d2f6c02334"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-sampled",
+   "greedy": false,
+   "decode_tps_median": 114.79,
+   "decode_tps_min": 106.89,
+   "decode_tps_max": 129.38,
+   "decode_tps_all": [
+    111.14,
+    114.79,
+    106.89,
+    129.38,
+    121.23
+   ],
+   "ttft_s_median": 0.099,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"\n    Compute the first `n` numbers of the Fibonacci sequence.\n\n    The Fibonacci sequence starts with 0 and 1, and each subsequent number\n    is th",
+   "text_sha256": [
+    "b2487f23478cc7d3",
+    "11d87b24c4525606",
+    "bad5667acdf86fd2",
+    "c23f60eff4dc9e98",
+    "b51fbae676e45738"
+   ]
+  },
+  {
+   "suite": "codechat",
+   "cell": "code-chat-greedy",
+   "greedy": true,
+   "decode_tps_median": 112.31,
+   "decode_tps_min": 111.84,
+   "decode_tps_max": 112.64,
+   "decode_tps_all": [
+    112.64,
+    112.4,
+    111.84,
+    111.88,
+    112.31
+   ],
+   "ttft_s_median": 0.099,
+   "tokens": 64,
+   "slow_runs_flagged": false,
+   "attempts": 1,
+   "sample": "# Fibonacci Sequence in Python\n\n## Function\n\n```python\ndef fibonacci(n: int) -> list[int]:\n    \"\"\"\n    Generate the first `n` numbers of the Fibonacci sequence.\n\n    Args:\n        n: The number of Fib",
+   "text_sha256": [
+    "6868f173dbcb6eee",
+    "6868f173dbcb6eee",
+    "6868f173dbcb6eee",
+    "6868f173dbcb6eee",
+    "6868f173dbcb6eee"
+   ]
+  },
+  {
+   "suite": "context",
+   "cell": "context-32768",
+   "prompt_tokens": 33141,
+   "ttft_s": 13.44,
+   "prefill_tps": 2465.8,
+   "decode_tps_median": 58.93,
+   "needle_found": true,
+   "followup_ttft_s": 0.26,
+   "followup_prompt_tokens": 33423,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 103.61,
+   "sample": "DEPLOY_CODE = \"ORCA-7409\"\n\n### Repository Architecture Explanation\n\nThe repository consists of a collection of independent, modular Python files, each defining a specific `@dataclass` that acts as a u"
+  },
+  {
+   "suite": "context",
+   "cell": "context-131072",
+   "prompt_tokens": 131249,
+   "ttft_s": 64.3,
+   "prefill_tps": 2041.1,
+   "decode_tps_median": 52.31,
+   "needle_found": true,
+   "followup_ttft_s": 0.8,
+   "followup_prompt_tokens": 131531,
+   "followup_cached_tokens": null,
+   "followup_decode_tps": 78.38,
+   "sample": "DEPLOY_CODE = \"ORCA-8359\"\n\n### Repository Architecture Explanation\n\nThe repository consists of a large collection of Python modules (files ending in `.py` within `src/` subdirectories) that appear to "
+  },
+  {
+   "suite": "exactness",
+   "cell": "drafted-vs-serial",
+   "passed": 9,
+   "total": 9,
+   "draft_speedup_median": 2.2,
+   "runs": [
+    {
+     "prompt": "code",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 106.05922776012072,
+     "serial_tps": 47.84750214876439
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 114.57771163952043,
+     "serial_tps": 52.03595174593883
+    },
+    {
+     "prompt": "code",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 107.26336277688465,
+     "serial_tps": 52.211867356130455
+    },
+    {
+     "prompt": "chat",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 95.39870237740215,
+     "serial_tps": 52.30172958636872
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 76.65433236010412,
+     "serial_tps": 52.11134169589536
+    },
+    {
+     "prompt": "chat",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 92.65595454418698,
+     "serial_tps": 52.01474997483225
+    },
+    {
+     "prompt": "json",
+     "sampling": "greedy",
+     "identical": true,
+     "drafted_tps": 143.57555650975826,
+     "serial_tps": 52.20899110092106
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1234",
+     "identical": true,
+     "drafted_tps": 143.89219599861187,
+     "serial_tps": 52.01112128013696
+    },
+    {
+     "prompt": "json",
+     "sampling": "seed1235",
+     "identical": true,
+     "drafted_tps": 146.50597640991654,
+     "serial_tps": 52.10930167698519
+    }
+   ]
+  }
+ ]
+}
