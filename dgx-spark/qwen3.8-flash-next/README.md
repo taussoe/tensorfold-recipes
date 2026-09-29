@@ -51,6 +51,7 @@ drafted replies still equal serial ones (9/9).
 | **0.3.6.1, 2 Sparks** | 262k | **2,599 tok/s** | **12.8 s** | **2,258 tok/s** | **58 s** | **103 / 90 / 91 / 86** | 57.7 / 51.5 |
 | **0.3.6.2, 1 Spark** | 157k | 1,772 tok/s | 18.7 s | 1,660 tok/s | 79 s | 71 / 59 / 74 / 73 | 39.3 / 40.0 |
 | **0.3.6.2, 2 Sparks** | 262k | 2,466 tok/s | 13.4 s | 2,041 tok/s | 64 s | **104 / 91 / 92 / 89** | 58.9 / 52.3 |
+| **0.3.6.3 + agent turns, 1 Spark** | 157k | 2,102 tok/s | 15.8 s | 1,840 tok/s | 71 s | 77 / 61 / 75 / 72 | 52.2 / 47.3 |
 | vLLM + MTP (published, 1 Spark) | | 2,314 tok/s | | | | 42 / 33 / 41 / 38 | |
 
 Every run found the hidden fact at 32k and 128k. Code written as a chat reply (`--suites codechat`): 0.3.6.1
@@ -76,6 +77,33 @@ one GPU). One Spark, 256-token prose replies, each stream with a 32k context, dr
 | 2 | 48.5 | 93.1 |
 | 4 | 36.3 | 137.6 |
 | 8 | 24.1 | **181.3** (vLLM + MTP on one Spark, published: 163) |
+
+## Agent turns
+
+An agent (Glyph, a coding harness) sends each reply back without its reasoning. Qwen's template then renders that
+turn's empty reasoning block as `<think>` and two newlines, one token, where the prompt before ended in `<think>` and
+one newline: the next prompt parts from the kept one at its very last token. Flash Next resumes only from a whole kept
+prompt, so in TensorFold 0.3.6.3 as released it reads every agent turn from the start (0 of 42 calls of a recorded Glyph
+session resumed). Our `engine/` branch keeps the state before the prompt's last token instead (the 27B does the same
+in 0.3.6.3); the prompt's state and reply stay byte-identical (CUDA tests on a Spark).
+
+The same 42 calls of a recorded Glyph session (three sub-agents reviewing a repo, then the lead agent), replayed with
+`bench/replay.py --chains` on one Spark, 29 September 2026:
+
+| Setup | Session time | Prompt tokens read afresh | Prompt reading |
+| --- | ---: | ---: | ---: |
+| 0.3.6.2, one stream | 16.0 min | 1,154,408 of 1,154,408 | 9.3 min |
+| 0.3.6.2, `PARALLEL=4` | 15.4 min | 1,154,408 | 9.0 min |
+| [MiaAI-Lab's single-Spark setup](https://github.com/MiaAI-Lab/Qwen3.8-Flash-Next-Single-DGX-Spark-TensorFold) (0.3.6.3, 5 streams, int8 cache) | 16.9 min | 1,154,408 | 9.0 min |
+| **0.3.6.3 + agent turns, one stream** | 10.8 min | 507,455 | 4.0 min |
+| **0.3.6.3 + agent turns, `PARALLEL=4`** | **7.6 min** | **115,222** | **67 s** |
+
+One stream keeps one conversation's state: sub-agents that take turns push each other's out, so for parallel
+sub-agents start with `NODES=1 PARALLEL=4 CONTEXT=65536 ./start.sh` (each stream keeps its own). A 32k-token turn then
+reads its prompt in 0.5 s instead of 15 s.
+
+MiaAI-Lab's setup decodes faster deep in a long prompt in `bench.py`'s context suite (62.6 / 56.5 tok/s at 32k / 128k,
+ours 52.2 / 47.3); prompt reading and the standard cells are the same within a few percent.
 
 ## What matters for speed
 

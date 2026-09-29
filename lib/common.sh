@@ -6,8 +6,8 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # TensorFold is pinned to one commit so every Spark and every benchmark runs the same code.
 # Bump both lines together (see docs/02-optimization.md#updating-tensorfold).
-TENSORFOLD_VERSION=0.3.6.2
-TENSORFOLD_COMMIT=71377a5373ed7b394f1b480ba2a6a3986b03af1c
+TENSORFOLD_VERSION=0.3.6.3
+TENSORFOLD_COMMIT=191188075bca56a7c71074a79375eb4c1cb22e1c
 TENSORFOLD_PIP="git+https://github.com/ashhart/TensorFold.git@${TENSORFOLD_COMMIT}"
 
 # Where the Spark image's TensorFold comes from:

@@ -25,8 +25,13 @@ import urllib.request
 from pathlib import Path
 
 
+MODEL = None       # --model: another server's model id
+
+
 def send(target: str, row: dict, started: float, out: Path, lock: threading.Lock) -> float:
     body = dict(row["body"] or {})
+    if MODEL:
+        body["model"] = MODEL
     body["stream"] = True
     body["stream_options"] = {"include_usage": True}
     req = urllib.request.Request(target + row["path"], json.dumps(body).encode(),
@@ -103,12 +108,15 @@ def main() -> int:
     p.add_argument("--target", required=True)
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--no-pauses", action="store_true", help="send each call as soon as the one before it ends")
+    p.add_argument("--model", help="send every call with this model id (another server)")
     p.add_argument("--chains", action="store_true", help="each conversation as its own chain (parallel sub-agents)")
     p.add_argument("--from", dest="t_from", type=float, default=0.0)
     p.add_argument("--to", dest="t_to", type=float, default=float("inf"))
     a = p.parse_args()
     rows = sorted((json.loads(l) for l in a.recording.read_text().splitlines() if l.strip()),
                   key=lambda r: r["start"])
+    global MODEL
+    MODEL = a.model
     rows = [r for r in rows if r.get("status") == 200 and r.get("body") and a.t_from <= r["start"] <= a.t_to]
     a.out.parent.mkdir(parents=True, exist_ok=True)
     a.out.write_text("")

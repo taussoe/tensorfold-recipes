@@ -151,8 +151,9 @@ Prompt reading is now within 1% of vLLM at 128k and 4% at 32k, and with `PARALLE
 
 ## Images
 
-Our `engine/` branch reads images: OpenAI `image_url` parts (data: or http URLs) in user and tool messages, as
-Glyph and most agent harnesses send screenshots. TensorFold 0.3.6.2 as released answers them with HTTP 400.
+Our `engine/` branch reads images: OpenAI `image_url` parts (data: URLs) in user messages, as Glyph and most agent
+harnesses send screenshots. The server loads them as 0.3.6.3 does for Qwen (at most 4 a request); TensorFold 0.3.6.3
+as released answers them for GLM with HTTP 400.
 
 - **Same preprocessing as the checkpoint's processor.** The image is fitted on a canvas rounded up to 28 pixels
   (zero padding right and bottom), 16 to 8,000 image tokens, one token per 28×28 pixels. Checked equal to
@@ -185,7 +186,7 @@ largest image, but 1.5% off the exact rows, so the tower stays exact.
 Four things in our `engine/` branch aim at the time an agent (Glyph, a coding harness) waits, measured on the two
 Sparks, 28 September 2026:
 
-**Reasoning effort.** GLM-5.3's template writes a "Reasoning Effort" line: Low, High or Max. TensorFold 0.3.6.2's
+**Reasoning effort.** GLM-5.3's template writes a "Reasoning Effort" line: Low, High or Max. TensorFold 0.3.6.3's
 CUDA server does not pass `reasoning_effort` on, so every request thinks at Max. The branch maps it: `minimal`/`low`
 to Low, `medium`/`high` to High, `xhigh`/`max` to Max, `none` turns thinking off; without the field it stays Max.
 Three coding prompts, one seed:

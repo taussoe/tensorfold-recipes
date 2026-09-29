@@ -25,14 +25,14 @@ measure your own with `./bench.sh`.
 
 ## Our TensorFold branch (`engine/`)
 
-The Spark recipes build TensorFold from `engine/` (`setup.sh` clones it the first time): branch `glm-long-context`, TensorFold 0.3.6.2 with our
-agent work for GLM-5.3-Flash on top (Flash Next and the 27B run 0.3.6.2's own code). Set
+The Spark recipes build TensorFold from `engine/` (`setup.sh` clones it the first time): branch `glm-long-context`, TensorFold 0.3.6.3 with our
+agent work for GLM-5.3-Flash and Flash Next's agent-turn resume on top (the 27B runs 0.3.6.3's own code). Set
 `TENSORFOLD_SOURCE=pinned` for a released TensorFold, or `ENGINE_DIR=<checkout>` to build another tree. To clone it
 yourself: `git clone -b glm-long-context https://github.com/taussoe/TensorFold.git engine`.
 
 Our GLM long-context work is part of TensorFold itself since 0.3.6.2: Ash merged it from
 [#54](https://github.com/ashhart/TensorFold/pull/54) (the first five rows below), with fixes of his own on top. The
-rest is what the branch adds to 0.3.6.2. Every change is tested so drafted replies stay byte-identical to serial ones:
+rest is what the branch adds to 0.3.6.3. Every change is tested so drafted replies stay byte-identical to serial ones:
 
 | Change | Effect |
 | --- | --- |
@@ -47,6 +47,7 @@ rest is what the branch adds to 0.3.6.2. Every change is tested so drafted repli
 | Prompts kept on disk, written as the rows each adds | a 103k-token conversation resumes in 0.8 s after another one, 3.1 s after a restart (85 s cold) |
 | Checkpoints every 4k-16k tokens of a prefill on disk | a new agent sharing an 18k-token tool list starts in 2-3 s instead of 19 s |
 | Drafts copied from the context when the last 8 tokens stand earlier | file rewrites 1.12–1.38x faster, replies byte-identical |
+| Flash Next keeps the state before a prompt's last token, so an agent's next turn (sent back without its reasoning) resumes | a 32k-token agent turn reads its prompt in 0.5 s instead of 15 s ([details](dgx-spark/qwen3.8-flash-next/README.md#agent-turns)) |
 
 With 0.3.5.1's prompt kernels and a bf16 head GEMM for absorb/expand, GLM reads a 32k prompt at 1,292 tok/s and a
 128k one at 1,231 (vLLM: 1,350 and 1,243); on our 0.3.4-based branch it was 772 and 739, on TensorFold 0.3.4 187 and none. The older branch is
@@ -123,8 +124,8 @@ tools/                       doctor.sh (checks), bench-all.sh (benchmark every m
 
 | Component | Version |
 | --- | --- |
-| TensorFold (Mac) | 0.3.6.2, commit `71377a5` (`lib/common.sh`) |
-| TensorFold (Sparks) | `engine/`, branch `glm-long-context` on 0.3.6.2 (`TENSORFOLD_SOURCE=local`, the default) |
+| TensorFold (Mac) | 0.3.6.3, commit `1911880` (`lib/common.sh`) |
+| TensorFold (Sparks) | `engine/`, branch `glm-long-context` on 0.3.6.3 (`TENSORFOLD_SOURCE=local`, the default) |
 | NVIDIA PyTorch container | `nvcr.io/nvidia/pytorch:26.07-py3` |
 
 Pinning is deliberate: both Sparks and every benchmark run the same code. [Updating](docs/02-optimization.md#updating-the-pins).
@@ -136,7 +137,7 @@ Pinning is deliberate: both Sparks and every benchmark run the same code. [Updat
   byte-identical to serial decoding), the CUDA and MLX engines, and the models' kernels. This repo only packages,
   measures and extends it. Our `engine/` branch
   ([taussoe/TensorFold, `glm-long-context`](https://github.com/taussoe/TensorFold/tree/glm-long-context)) is a fork of
-  TensorFold 0.3.6.2; its GLM long-context work was merged into TensorFold 0.3.6.2 from
+  TensorFold 0.3.6.3; its GLM long-context work was merged into TensorFold 0.3.6.2 from
   [#54](https://github.com/ashhart/TensorFold/pull/54).
 - **[Mia-AiLab](https://github.com/MiaAI-Lab)**'s vLLM recipes for DGX Spark are the baselines the benchmarks compare
   against, measured on the same machines, and the starting point for this repo's layout.
