@@ -232,7 +232,10 @@ one row takes 27.8 ms without the network and 29.1 ms across both Sparks, so the
 experts take 12.3 ms, reading ~2.7 GB at ~220 GB/s (80% of GB10's 273 GB/s); the other 4-bit projections run at
 ~220 GB/s too with weights not in L2 (`engine/tools/tune_glm_qmm.py`: the best K split of every shape would save
 0.8 ms a step, under 3%, so we kept TensorFold's); the rest ~5 ms. Four rows take 2.6x the expert time, because
-four tokens route to ~3x as many experts. Decoding is bound by memory bandwidth and close to it.
+four tokens route to ~3x as many experts. Decoding is bound by memory bandwidth and close to it: GB10 reads at
+~241-245 GB/s in practice (`engine/tools/bench_gb10_bandwidth.py`, 4 GB streamed), so the big kernels run at ~90% of
+what it can do. Of the ~5 ms of small kernels, the hyper-connection mixing and the router were tuned in isolation
+(`engine/tools/tune_glm_small.py`): 0.1 ms to gain, so they stay as they are.
 
 Fewer bytes a token is what is left, so we measured Mia-AiLab's EXL3 checkpoint (`GLM-5.3-Flash-EXL3-TR3-4bpw`:
 4-bit EXL3 experts, every other weight BF16) on the same branch: a 1-row step takes 58.1 ms (29.1 on MLX), standard
