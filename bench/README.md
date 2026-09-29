@@ -67,3 +67,21 @@ python3 bench/compare.py --csv > all.csv           # for a spreadsheet
 - The same prompts, seeds, reply length and client for every engine: that is what `bench.py` is for.
 - Note power and thermal state on a Mac (plugged in, High Power, cool).
 - One change at a time, labelled, and compare labelled runs from the same session.
+
+## Recording an agent session
+
+`record.py` is a small proxy in front of a TensorFold server: point an agent (Glyph, opencode) at it and every
+request is written to a JSON-lines file with its timing and the server's own figures. `report.py` shows where a
+session's time went (the server reading prompts, and how much afresh; decoding and thinking; the agent's own time
+between calls), by kind of call; two recordings side by side compare a before and an after. `replay.py` sends a
+recording to a server again with the agent's pauses, to measure a server change on the same traffic.
+
+```bash
+python3 bench/record.py --target http://<spark1>:8080 --port 8090 --out recordings/task.jsonl
+# the agent's base URL: http://127.0.0.1:8090/v1; run a real task; Ctrl-C the proxy
+python3 bench/report.py recordings/task.jsonl
+python3 bench/replay.py recordings/task.jsonl --target http://<spark1>:8080 --out recordings/task-replay.jsonl
+python3 bench/report.py recordings/task.jsonl recordings/task-replay.jsonl
+```
+
+Recordings hold your prompts, code and screenshots; `recordings/` is not committed.
