@@ -8,6 +8,10 @@ record what the server did: the same traffic before and after a server change.
 A call that began while the one before it was still running (parallel sub-agents) starts at the same offset after
 it again; any other call starts the recorded pause after the previous call ended, so a faster server finishes the
 session sooner. The agent's replies are not re-run: a changed reply does not change the next request.
+
+--chains replays each conversation (its first user message) as its own chain: a chain's calls follow one another
+with the recorded pause after each (the agent's tools), whatever else was queued on the server when it was
+recorded, and chains start at their recorded offsets; --from/--to keep the calls that began in that window.
 """
 
 from __future__ import annotations
@@ -58,19 +62,59 @@ def send(target: str, row: dict, started: float, out: Path, lock: threading.Lock
     return end
 
 
+def chain_key(row: dict) -> str:
+    msgs = (row.get("body") or {}).get("messages") or []
+    users = [m for m in msgs if m.get("role") == "user"]
+    c = users[0].get("content") if users else ""
+    if isinstance(c, list):
+        c = " ".join(p.get("text", "") for p in c if isinstance(p, dict))
+    return " ".join(str(c).split()[:30])
+
+
+def run_chains(rows: list[dict], a, lock: threading.Lock, started: float) -> int:
+    chains: dict[str, list[dict]] = {}
+    for r in rows:
+        chains.setdefault(chain_key(r), []).append(r)
+    t0 = min(r["start"] for r in rows)
+    ends: dict[str, float] = {}
+
+    def run(key: str, rs: list[dict]) -> None:
+        time.sleep(max(0.0, rs[0]["start"] - t0 - (time.time() - started)))
+        for i, row in enumerate(rs):
+            send(a.target.rstrip("/"), row, started, a.out, lock)
+            if i + 1 < len(rs) and not a.no_pauses:
+                time.sleep(max(0.0, rs[i + 1]["start"] - (row["start"] + row["seconds"])))
+        ends[key] = time.time() - started
+
+    threads = [threading.Thread(target=run, args=(k, rs)) for k, rs in chains.items()]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    for k, rs in chains.items():
+        print(f"chain of {len(rs):3d} calls: began {rs[0]['start'] - t0:6.1f}s, ended {ends[k]:7.1f}s  | {k[:60]}")
+    print(f"replayed {len(rows)} calls in {len(chains)} chains in {time.time() - started:.1f}s -> {a.out}")
+    return 0
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("recording", type=Path)
     p.add_argument("--target", required=True)
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--no-pauses", action="store_true", help="send each call as soon as the one before it ends")
+    p.add_argument("--chains", action="store_true", help="each conversation as its own chain (parallel sub-agents)")
+    p.add_argument("--from", dest="t_from", type=float, default=0.0)
+    p.add_argument("--to", dest="t_to", type=float, default=float("inf"))
     a = p.parse_args()
     rows = sorted((json.loads(l) for l in a.recording.read_text().splitlines() if l.strip()),
                   key=lambda r: r["start"])
-    rows = [r for r in rows if r.get("status") == 200 and r.get("body")]
+    rows = [r for r in rows if r.get("status") == 200 and r.get("body") and a.t_from <= r["start"] <= a.t_to]
     a.out.parent.mkdir(parents=True, exist_ok=True)
     a.out.write_text("")
     lock, started = threading.Lock(), time.time()
+    if a.chains:
+        return run_chains(rows, a, lock, started)
     threads: list[threading.Thread] = []
     prev = None                 # the previous recorded row and its thread / replayed start
     prev_start = started
