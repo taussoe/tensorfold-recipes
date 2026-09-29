@@ -56,6 +56,13 @@ drafted replies still equal serial ones (9/9).
 Every run found the hidden fact at 32k and 128k. Code written as a chat reply (`--suites codechat`): 0.3.6.1
 80.0 / 81.2 tok/s on one Spark and 114.4 / 110.0 on two, 0.3.6.2 79.8 / 81.0 and 114.8 / 112.3 (sampled / greedy).
 
+**Where a decode step goes** (one Spark, `engine/tools/profile_flashnext_decode.py`, 29 September 2026): 25.0 ms
+for one row. The routed and shared experts read ~1.63 GB in 8.5 ms (~79% of the ~243 GB/s GB10 reads in practice),
+the other 4-bit projections and the head ~2.1 GB in 9.8 ms (~88%), the GDN chain 1.2 ms. The hyper-connection mixes
+(97 small down and up products of 2 MB) take 3.8 ms at ~43%: their launch settings that keep the bits save 0.2 ms
+(`engine/tools/tune_flashnext_hc.py`), the rest is the cost of many small calls. Decoding is close to what the
+memory reads allow.
+
 Prompt reading moves with the machine's state from day to day, not only with the release: side by side on one
 Spark on 29 September, 0.3.6.1 read a 36,870-token prompt at 2,096-2,138 tok/s and 0.3.6.2 at 2,089-2,123, a
 138,467-token one at 1,656-1,665 and 1,652-1,655. Compare releases in one session.
